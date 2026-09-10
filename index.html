@@ -1,1 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Music Personality Booth</title>
 
+<style>
+*{box-sizing:border-box}
+body{
+margin:0;
+background:#080808;
+color:#fff;
+font-family:Arial,sans-serif
+}
+.screen{
+display:none;
+min-height:100vh;
+padding:35px 24px;
+align-items:center;
+justify-content:center;
+text-align:center
+}
+.screen.active{display:flex}
+.box{width:100%;max-width:520px}
+.brand{
+color:#d4af37;
+letter-spacing:3px;
+font-size:14px;
+font-weight:bold;
+margin-bottom:35px
+}
+h1{
+font-size:40px;
+line-height:1.05;
+margin:10px 0 18px
+}
+h2{
+font-size:29px;
+margin-bottom:35px
+}
+.gold{color:#d4af37}
+.subtitle{
+color:#ccc;
+font-size:18px;
+line-height:1.5;
+margin-bottom:38px
+}
+button{
+width:100%;
+min-height:65px;
+border-radius:14px;
+border:1px solid #d4af37;
+background:#151515;
+color:#fff;
+font-size:18px;
+font-weight:bold;
+margin:9px 0;
+padding:15px
+}
+.start{
+background:#d4af37;
+color:#000;
+font-size:20px
+}
+.number{
+color:#d4af37;
+letter-spacing:2px;
+font-size:13px;
+margin-bottom:20px
+}
+.icon{
+font-size:85px;
+margin:20px 0
+}
+.instrument{
+color:#d4af37;
+font-size:40px;
+font-weight:bold;
+margin:15px 0
+}
+.resultText{
+color:#ddd;
+font-size:18px;
+line-height:1.5;
+margin-bottom:35px
+}
+.loader{
+width:55px;
+height:55px;
+border:5px solid #333;
+border-top:5px solid #d4af37;
+border-radius:50%;
+margin:35px auto;
+animation:spin 1s linear infinite
+}
+@keyframes spin{
+to{transform:rotate(360deg)}
+}
+.footer{
+margin-top:35px;
+color:#777;
+font-size:12px
+}
+</style>
+</head>
+
+<body>
+
+<section class="screen active" id="start">
+<div class="box">
+<div class="brand">ACADEMIA DE CHITARĂ</div>
+
+<h1>
+WHAT'S YOUR<br>
+<span class="gold">MUSIC PERSONALITY?</span>
+</h1>
+
+<div class="subtitle">
+Discover the instrument that fits you.
+</div>
+
+<button class="start" onclick="go('q1')">
+START
+</button>
+
+<div class="footer">Music Personality Booth</div>
+</div>
+</section>
+
+
+<section class="screen" id="q1">
+<div class="box">
+
+<div class="number">QUESTION 1 OF 3</div>
+
+<h2>WHERE WOULD YOU<br>RATHER BE?</h2>
+
+<button onclick="answer('stage','q2')">
+🎤 ON STAGE
+</button>
+
+<button onclick="answer('studio','q2')">
+🎧 IN THE STUDIO
+</button>
+
+</div>
+</section>
+
+
+<section class="screen" id="q2">
+<div class="box">
+
+<div class="number">QUESTION 2 OF 3</div>
+
+<h2>HOW SHOULD YOUR<br>MUSIC FEEL?</h2>
+
+<button onclick="answer('loud','q3')">
+⚡ LOUD & ENERGETIC
+</button>
+
+<button onclick="answer('chill','q3')">
+🌙 CHILL & EMOTIONAL
+</button>
+
+</div>
+</section>
+
+
+<section class="screen" id="q3">
+<div class="box">
+
+<div class="number">QUESTION 3 OF 3</div>
+
+<h2>YOU'D RATHER...</h2>
+
+<button onclick="finish('solo')">
+⭐ PLAY SOLO
+</button>
+
+<button onclick="finish('band')">
+👥 PLAY IN A BAND
+</button>
+
+</div>
+</section>
+
+
+<section class="screen" id="loading">
+<div class="box">
+
+<div class="brand">ACADEMIA DE CHITARĂ</div>
+
+<h2>
+ANALYZING YOUR<br>
+<span class="gold">MUSIC PERSONALITY...</span>
+</h2>
+
+<div class="loader"></div>
+
+</div>
+</section>
+
+
+<section class="screen" id="result">
+<div class="box">
+
+<div class="brand">YOUR MUSIC PERSONALITY</div>
+
+<div class="icon" id="resultIcon"></div>
+
+<div class="instrument" id="resultInstrument"></div>
+
+<div class="resultText" id="resultText"></div>
+
+<button class="start" onclick="restart()">
+TRY AGAIN
+</button>
+
+<div class="footer">AcademiaDeChitara.ro</div>
+
+</div>
+</section>
+
+
+<script>
+
+let answers=[];
+
+function go(id){
+document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+}
+
+function answer(choice,next){
+answers.push(choice);
+go(next);
+}
+
+function finish(choice){
+answers.push(choice);
+go('loading');
+setTimeout(showResult,1800);
+}
+
+function showResult(){
+
+let stage=answers.includes('stage');
+let studio=answers.includes('studio');
+let loud=answers.includes('loud');
+let chill=answers.includes('chill');
+let solo=answers.includes('solo');
+let band=answers.includes('band');
+
+let instrument;
+let icon;
+let text;
+
+if(stage&&loud&&band){
+instrument="ELECTRIC GUITAR";
+icon="🎸";
+text="Energy, attitude and teamwork. You belong on stage.";
+}
+
+else if(stage&&loud&&solo){
+instrument="DRUMS";
+icon="🥁";
+text="You've got energy and rhythm. Time to make some noise.";
+}
+
+else if(stage&&chill&&solo){
+instrument="VOICE";
+icon="🎤";
+text="Expression and emotion are your superpowers.";
+}
+
+else if(stage&&chill&&band){
+instrument="ACOUSTIC GUITAR";
+icon="🎸";
+text="You like connection, melody and sharing music with others.";
+}
+
+else if(studio&&loud&&band){
+instrument="BASS";
+icon="🎸";
+text="You are the groove that keeps the whole band together.";
+}
+
+else if(studio&&chill&&solo){
+instrument="PIANO";
+icon="🎹";
+text="Creative, expressive and focused. The piano fits your world.";
+}
+
+else if(studio&&chill&&band){
+instrument="UKULELE";
+icon="🌴";
+text="Relaxed, positive and social. Music should make people smile.";
+}
+
+else{
+instrument="ELECTRIC GUITAR";
+icon="🎸";
+text="Creative energy and a strong musical personality.";
+}
+
+document.getElementById('resultIcon').innerText=icon;
+document.getElementById('resultInstrument').innerText=instrument;
+document.getElementById('resultText').innerText=text;
+
+go('result');
+}
+
+function restart(){
+answers=[];
+go('start');
+}
+
+</script>
+</body>
+</html>
