@@ -7,12 +7,14 @@
 
 <style>
 *{box-sizing:border-box}
+
 body{
 margin:0;
 background:#080808;
 color:#fff;
 font-family:Arial,sans-serif
 }
+
 .screen{
 display:none;
 min-height:100vh;
@@ -21,8 +23,14 @@ align-items:center;
 justify-content:center;
 text-align:center
 }
+
 .screen.active{display:flex}
-.box{width:100%;max-width:520px}
+
+.box{
+width:100%;
+max-width:520px
+}
+
 .brand{
 color:#d4af37;
 letter-spacing:3px;
@@ -30,22 +38,27 @@ font-size:14px;
 font-weight:bold;
 margin-bottom:35px
 }
+
 h1{
 font-size:40px;
 line-height:1.05;
 margin:10px 0 18px
 }
+
 h2{
 font-size:29px;
 margin-bottom:35px
 }
+
 .gold{color:#d4af37}
+
 .subtitle{
 color:#ccc;
 font-size:18px;
 line-height:1.5;
 margin-bottom:38px
 }
+
 button{
 width:100%;
 min-height:65px;
@@ -58,33 +71,44 @@ font-weight:bold;
 margin:9px 0;
 padding:15px
 }
+
 .start{
 background:#d4af37;
 color:#000;
 font-size:20px
 }
+
+.secondary{
+background:#151515;
+color:#fff
+}
+
 .number{
 color:#d4af37;
 letter-spacing:2px;
 font-size:13px;
 margin-bottom:20px
 }
+
 .icon{
 font-size:85px;
 margin:20px 0
 }
+
 .instrument{
 color:#d4af37;
 font-size:40px;
 font-weight:bold;
 margin:15px 0
 }
+
 .resultText{
 color:#ddd;
 font-size:18px;
 line-height:1.5;
 margin-bottom:35px
 }
+
 .loader{
 width:55px;
 height:55px;
@@ -94,13 +118,55 @@ border-radius:50%;
 margin:35px auto;
 animation:spin 1s linear infinite
 }
+
 @keyframes spin{
 to{transform:rotate(360deg)}
 }
+
 .footer{
 margin-top:35px;
 color:#777;
 font-size:12px
+}
+
+.cameraBox{
+width:100%;
+aspect-ratio:3/4;
+background:#111;
+border:1px solid #333;
+border-radius:22px;
+overflow:hidden;
+margin-bottom:20px;
+position:relative
+}
+
+video,
+#photoPreview{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block
+}
+
+#photoPreview{
+display:none
+}
+
+.cameraNote{
+color:#999;
+font-size:13px;
+line-height:1.4;
+margin:16px 0 24px
+}
+
+.selfieResult{
+width:150px;
+height:150px;
+border-radius:50%;
+object-fit:cover;
+border:3px solid #d4af37;
+margin:10px auto 25px;
+display:block
 }
 </style>
 </head>
@@ -109,6 +175,7 @@ font-size:12px
 
 <section class="screen active" id="start">
 <div class="box">
+
 <div class="brand">ACADEMIA DE CHITARĂ</div>
 
 <h1>
@@ -117,14 +184,49 @@ WHAT'S YOUR<br>
 </h1>
 
 <div class="subtitle">
-Answer 5 quick questions and discover your instrument.
+Take a selfie, answer 5 quick questions and discover your instrument.
 </div>
 
-<button class="start" onclick="go('q1')">
+<button class="start" onclick="openCamera()">
 START
 </button>
 
 <div class="footer">Music Personality Booth</div>
+
+</div>
+</section>
+
+
+<section class="screen" id="camera">
+<div class="box">
+
+<div class="number">STEP 1</div>
+
+<h2>TAKE YOUR SELFIE</h2>
+
+<div class="cameraBox">
+<video id="video" autoplay playsinline muted></video>
+<img id="photoPreview">
+</div>
+
+<canvas id="canvas" style="display:none;"></canvas>
+
+<button class="start" id="captureButton" onclick="takePhoto()">
+📸 TAKE PHOTO
+</button>
+
+<button class="start" id="useButton" onclick="usePhoto()" style="display:none;">
+USE THIS PHOTO
+</button>
+
+<button class="secondary" id="retakeButton" onclick="retakePhoto()" style="display:none;">
+RETAKE
+</button>
+
+<div class="cameraNote">
+Your photo stays on this device during this test and is not uploaded.
+</div>
+
 </div>
 </section>
 
@@ -186,6 +288,7 @@ START
 
 <section class="screen" id="loading">
 <div class="box">
+
 <div class="brand">ACADEMIA DE CHITARĂ</div>
 
 <h2>
@@ -194,6 +297,7 @@ ANALYZING YOUR<br>
 </h2>
 
 <div class="loader"></div>
+
 </div>
 </section>
 
@@ -202,6 +306,8 @@ ANALYZING YOUR<br>
 <div class="box">
 
 <div class="brand">YOUR MUSIC PERSONALITY</div>
+
+<img id="resultSelfie" class="selfieResult">
 
 <div class="icon" id="resultIcon"></div>
 
@@ -219,6 +325,9 @@ ANALYZING YOUR<br>
 
 <script>
 
+let stream=null;
+let selfieData=null;
+
 let scores={
 electric:0,
 acoustic:0,
@@ -235,15 +344,122 @@ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
 document.getElementById(id).classList.add('active');
 }
 
+async function openCamera(){
+
+go('camera');
+
+try{
+
+stream=await navigator.mediaDevices.getUserMedia({
+video:{
+facingMode:"user",
+width:{ideal:1080},
+height:{ideal:1440}
+},
+audio:false
+});
+
+document.getElementById('video').srcObject=stream;
+
+}catch(error){
+
+alert(
+"Camera access is required. Please allow camera permission in your browser and try again."
+);
+
+console.error(error);
+}
+
+}
+
+function takePhoto(){
+
+const video=document.getElementById('video');
+const canvas=document.getElementById('canvas');
+const preview=document.getElementById('photoPreview');
+
+canvas.width=video.videoWidth;
+canvas.height=video.videoHeight;
+
+const ctx=canvas.getContext('2d');
+
+ctx.drawImage(video,0,0,canvas.width,canvas.height);
+
+selfieData=canvas.toDataURL('image/jpeg',0.9);
+
+preview.src=selfieData;
+preview.style.display='block';
+video.style.display='none';
+
+document.getElementById('captureButton').style.display='none';
+document.getElementById('useButton').style.display='block';
+document.getElementById('retakeButton').style.display='block';
+
+stopCamera();
+}
+
+function usePhoto(){
+
+document.getElementById('resultSelfie').src=selfieData;
+
+go('q1');
+
+}
+
+async function retakePhoto(){
+
+selfieData=null;
+
+document.getElementById('photoPreview').style.display='none';
+document.getElementById('video').style.display='block';
+
+document.getElementById('captureButton').style.display='block';
+document.getElementById('useButton').style.display='none';
+document.getElementById('retakeButton').style.display='none';
+
+try{
+
+stream=await navigator.mediaDevices.getUserMedia({
+video:{facingMode:"user"},
+audio:false
+});
+
+document.getElementById('video').srcObject=stream;
+
+}catch(error){
+
+alert("Camera could not be opened.");
+
+}
+
+}
+
+function stopCamera(){
+
+if(stream){
+
+stream.getTracks().forEach(track=>track.stop());
+stream=null;
+
+}
+
+}
+
 function choose(choice,next){
+
 applyScore(choice);
 go(next);
+
 }
 
 function finish(choice){
+
 applyScore(choice);
+
 go('loading');
+
 setTimeout(showResult,1800);
+
 }
 
 function applyScore(choice){
@@ -325,50 +541,59 @@ scores.bass+=1;
 function showResult(){
 
 let winner=Object.keys(scores).reduce((a,b)=>
-scores[a] > scores[b] ? a : b
+scores[a]>scores[b]?a:b
 );
 
 let data={
+
 electric:{
 name:"ELECTRIC GUITAR",
 icon:"🎸",
 text:"Bold, energetic and expressive. You like making an impact and being heard."
 },
+
 acoustic:{
 name:"ACOUSTIC GUITAR",
 icon:"🎸",
 text:"Warm, expressive and versatile. You enjoy melody, connection and sharing music."
 },
+
 piano:{
 name:"PIANO",
 icon:"🎹",
 text:"Focused, creative and expressive. You enjoy building melodies and exploring harmony."
 },
+
 bass:{
 name:"BASS",
 icon:"🎸",
 text:"Steady, rhythmic and essential. You are the groove that keeps the band together."
 },
+
 drums:{
 name:"DRUMS",
 icon:"🥁",
 text:"Energetic, instinctive and rhythmic. You like driving the music forward."
 },
+
 ukulele:{
 name:"UKULELE",
 icon:"🌴",
 text:"Positive, relaxed and social. You like music that feels natural and fun."
 },
+
 voice:{
 name:"VOICE",
 icon:"🎤",
 text:"Expressive, emotional and confident. Your personality comes through directly in the music."
 },
+
 production:{
 name:"MUSIC PRODUCTION",
 icon:"🎛️",
 text:"Creative, curious and detail-oriented. You like shaping sounds and building music from the ground up."
 }
+
 };
 
 document.getElementById('resultIcon').innerText=data[winner].icon;
@@ -376,9 +601,14 @@ document.getElementById('resultInstrument').innerText=data[winner].name;
 document.getElementById('resultText').innerText=data[winner].text;
 
 go('result');
+
 }
 
 function restart(){
+
+stopCamera();
+
+selfieData=null;
 
 scores={
 electric:0,
@@ -391,7 +621,15 @@ voice:0,
 production:0
 };
 
+document.getElementById('photoPreview').style.display='none';
+document.getElementById('video').style.display='block';
+
+document.getElementById('captureButton').style.display='block';
+document.getElementById('useButton').style.display='none';
+document.getElementById('retakeButton').style.display='none';
+
 go('start');
+
 }
 
 </script>
