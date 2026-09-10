@@ -4,510 +4,2394 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Music Personality Booth</title>
+
 <style>
 *{box-sizing:border-box}
-:root{--gold:#dcb631;--bg:#050505;--card:#111}
-body{margin:0;background:var(--bg);color:#fff;font-family:Arial,Helvetica,sans-serif}
-.screen{display:none;min-height:100vh;padding:25px 24px 45px;align-items:center;justify-content:center;text-align:center}
+
+:root{
+  --gold:#dcb631;
+  --bg:#050505;
+  --card:#111;
+}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:#fff;
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+.screen{
+  display:none;
+  min-height:100vh;
+  padding:25px 24px 45px;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+
 .screen.active{display:flex}
-.box{width:100%;max-width:520px}
-.logo{width:230px;max-width:75%;height:auto;display:block;margin:0 auto 28px}
-.miniLogo{width:175px;max-width:60%;height:auto;display:block;margin:0 auto 28px}
-h1{font-size:38px;line-height:1.05;margin:10px 0 18px}
-h2{font-size:28px;line-height:1.2;margin:10px 0 30px}
+
+.box{
+  width:100%;
+  max-width:520px;
+}
+
+.logo{
+  width:230px;
+  max-width:75%;
+  height:auto;
+  display:block;
+  margin:0 auto 28px;
+}
+
+.miniLogo{
+  width:175px;
+  max-width:60%;
+  height:auto;
+  display:block;
+  margin:0 auto 28px;
+}
+
+h1{
+  font-size:38px;
+  line-height:1.05;
+  margin:10px 0 18px;
+}
+
+h2{
+  font-size:28px;
+  line-height:1.2;
+  margin:10px 0 30px;
+}
+
 .gold{color:var(--gold)}
-.subtitle{color:#ccc;font-size:17px;line-height:1.45;margin-bottom:34px}
-.number{color:var(--gold);font-size:12px;letter-spacing:2px;font-weight:bold;margin-bottom:18px}
-button{width:100%;min-height:64px;border-radius:15px;border:1px solid var(--gold);background:#141414;color:#fff;font-size:17px;font-weight:bold;padding:15px;margin:8px 0}
-button:active{transform:scale(.98)}
-.start{background:var(--gold);color:#000;border:none;font-size:19px}
-.secondary{background:#111;color:#fff}
-.footer{margin-top:30px;color:#666;font-size:12px}
 
-.cameraBox{width:100%;max-width:360px;aspect-ratio:3/4;margin:0 auto 20px;background:#111;border:2px solid var(--gold);border-radius:24px;overflow:hidden}
-video,#photoPreview{width:100%;height:100%;object-fit:cover;display:block}
+.subtitle{
+  color:#ccc;
+  font-size:17px;
+  line-height:1.45;
+  margin-bottom:34px;
+}
+
+.number{
+  color:var(--gold);
+  font-size:12px;
+  letter-spacing:2px;
+  font-weight:bold;
+  margin-bottom:18px;
+}
+
+button{
+  width:100%;
+  min-height:64px;
+  border-radius:15px;
+  border:1px solid var(--gold);
+  background:#141414;
+  color:#fff;
+  font-size:17px;
+  font-weight:bold;
+  padding:15px;
+  margin:8px 0;
+}
+
+button:active{
+  transform:scale(.98);
+}
+
+.start{
+  background:var(--gold);
+  color:#000;
+  border:none;
+  font-size:19px;
+}
+
+.secondary{
+  background:#111;
+  color:#fff;
+}
+
+.footer{
+  margin-top:30px;
+  color:#666;
+  font-size:12px;
+}
+
+
+/* CAMERA */
+
+.cameraBox{
+  width:100%;
+  max-width:360px;
+  aspect-ratio:3/4;
+  margin:0 auto 20px;
+  background:#111;
+  border:2px solid var(--gold);
+  border-radius:24px;
+  overflow:hidden;
+}
+
+video,#photoPreview{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
 #photoPreview{display:none}
-.cameraNote{color:#888;font-size:12px;margin-top:15px}
 
-.analysisTitle{font-size:30px;margin-bottom:10px}
-.analysisSub{color:#999;margin-bottom:35px}
-.scanCircle{width:150px;height:150px;margin:20px auto 35px;border-radius:50%;border:3px solid var(--gold);position:relative;overflow:hidden}
-.scanCircle img{width:100%;height:100%;object-fit:cover}
-.scanLine{position:absolute;width:100%;height:3px;background:var(--gold);box-shadow:0 0 14px var(--gold);top:0;animation:scan 1.4s infinite alternate ease-in-out}
-@keyframes scan{from{top:4%}to{top:94%}}
-.dnaRow{text-align:left;margin:22px 0}
-.dnaLabel{display:flex;justify-content:space-between;font-size:14px;margin-bottom:8px}
-.dnaBar{height:9px;background:#262626;border-radius:10px;overflow:hidden}
-.dnaFill{height:100%;width:0;background:linear-gradient(90deg,#8f7014,var(--gold));border-radius:10px;transition:width 1.2s ease}
+.cameraNote{
+  color:#888;
+  font-size:12px;
+  margin-top:15px;
+}
 
-.resultSelfie{width:150px;height:150px;border-radius:50%;object-fit:cover;border:3px solid var(--gold);margin:5px auto 18px}
-.resultIcon{font-size:74px;margin:8px 0}
-.instrument{color:var(--gold);font-size:38px;font-weight:900;margin:8px 0 3px}
-.archetype{font-size:21px;font-weight:bold;letter-spacing:2px;margin:8px 0 20px}
-.resultText{font-size:17px;line-height:1.45;color:#ddd;margin-bottom:28px}
-.resultPanel{background:#101010;border:1px solid #292929;border-radius:20px;padding:22px;margin:18px 0}
-.panelTitle{color:var(--gold);font-size:15px;letter-spacing:2px;font-weight:bold;margin-bottom:18px}
-.stat{margin:16px 0}
-.statTop{display:flex;justify-content:space-between;font-size:14px;margin-bottom:7px}
-.statTrack{background:#272727;height:8px;border-radius:20px;overflow:hidden}
-.statFill{height:100%;background:var(--gold);border-radius:20px;width:0;transition:width 1.4s ease}
-.challenge{border:1px solid var(--gold);border-radius:20px;padding:22px;margin:20px 0 24px}
-.challengeTitle{color:var(--gold);letter-spacing:2px;font-size:13px;font-weight:bold;margin-bottom:12px}
-.challengeMain{font-size:21px;font-weight:bold;margin-bottom:9px}
-.challengeText{font-size:14px;line-height:1.45;color:#bbb}
-.reveal{animation:reveal .7s ease}
-@keyframes reveal{from{opacity:0;transform:scale(.93)}to{opacity:1;transform:scale(1)}}
 
-/* MUSIC CARD SCREEN */
+/* ANALYSIS */
+
+.analysisTitle{
+  font-size:30px;
+  margin-bottom:10px;
+}
+
+.analysisSub{
+  color:#999;
+  margin-bottom:35px;
+}
+
+.scanCircle{
+  width:150px;
+  height:150px;
+  margin:20px auto 35px;
+  border-radius:50%;
+  border:3px solid var(--gold);
+  position:relative;
+  overflow:hidden;
+}
+
+.scanCircle img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.scanLine{
+  position:absolute;
+  width:100%;
+  height:3px;
+  background:var(--gold);
+  box-shadow:0 0 14px var(--gold);
+  top:0;
+  animation:scan 1.4s infinite alternate ease-in-out;
+}
+
+@keyframes scan{
+  from{top:4%}
+  to{top:94%}
+}
+
+.dnaRow{
+  text-align:left;
+  margin:22px 0;
+}
+
+.dnaLabel{
+  display:flex;
+  justify-content:space-between;
+  font-size:14px;
+  margin-bottom:8px;
+}
+
+.dnaBar{
+  height:9px;
+  background:#262626;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.dnaFill{
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,#8f7014,var(--gold));
+  border-radius:10px;
+  transition:width 1.2s ease;
+}
+
+
+/* RESULT */
+
+.resultSelfie{
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  object-fit:cover;
+  border:3px solid var(--gold);
+  margin:5px auto 18px;
+}
+
+.resultIcon{
+  font-size:74px;
+  margin:8px 0;
+}
+
+.instrument{
+  color:var(--gold);
+  font-size:38px;
+  font-weight:900;
+  margin:8px 0 3px;
+}
+
+.archetype{
+  font-size:21px;
+  font-weight:bold;
+  letter-spacing:2px;
+  margin:8px 0 20px;
+}
+
+.resultText{
+  font-size:17px;
+  line-height:1.45;
+  color:#ddd;
+  margin-bottom:28px;
+}
+
+.resultPanel{
+  background:#101010;
+  border:1px solid #292929;
+  border-radius:20px;
+  padding:22px;
+  margin:18px 0;
+}
+
+.panelTitle{
+  color:var(--gold);
+  font-size:15px;
+  letter-spacing:2px;
+  font-weight:bold;
+  margin-bottom:18px;
+}
+
+.stat{
+  margin:16px 0;
+}
+
+.statTop{
+  display:flex;
+  justify-content:space-between;
+  font-size:14px;
+  margin-bottom:7px;
+}
+
+.statTrack{
+  background:#272727;
+  height:8px;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.statFill{
+  height:100%;
+  background:var(--gold);
+  border-radius:20px;
+  width:0;
+  transition:width 1.4s ease;
+}
+
+.challenge{
+  border:1px solid var(--gold);
+  border-radius:20px;
+  padding:22px;
+  margin:20px 0 24px;
+}
+
+.challengeTitle{
+  color:var(--gold);
+  letter-spacing:2px;
+  font-size:13px;
+  font-weight:bold;
+  margin-bottom:12px;
+}
+
+.challengeMain{
+  font-size:21px;
+  font-weight:bold;
+  margin-bottom:9px;
+}
+
+.challengeText{
+  font-size:14px;
+  line-height:1.45;
+  color:#bbb;
+}
+
+.reveal{
+  animation:reveal .7s ease;
+}
+
+@keyframes reveal{
+  from{
+    opacity:0;
+    transform:scale(.93)
+  }
+  to{
+    opacity:1;
+    transform:scale(1)
+  }
+}
+
+
+/* FINAL MUSIC CARD SCREEN */
+
+.musicCardBox{
+  width:100%;
+  max-width:720px;
+}
+
+.cardTitle{
+  color:var(--gold);
+  font-size:13px;
+  font-weight:bold;
+  letter-spacing:3px;
+  margin-bottom:18px;
+}
+
 .cardPreview{
   width:100%;
-  max-width:390px;
   display:block;
   margin:0 auto 22px;
-  border-radius:22px;
-  border:1px solid #2f2f2f;
-  box-shadow:0 10px 40px rgba(0,0,0,.5)
+  border-radius:18px;
+  border:1px solid #333;
+  box-shadow:0 12px 40px rgba(0,0,0,.55);
 }
+
 .cardHint{
-  color:#aaa;
+  color:#999;
   font-size:13px;
   line-height:1.45;
-  margin:8px 0 18px
+  margin:8px 0 18px;
 }
-.hiddenCanvas{display:none}
+
+.hiddenCanvas{
+  display:none;
+}
 
 @media(max-width:420px){
+
   h1{font-size:34px}
+
   h2{font-size:25px}
+
   .instrument{font-size:34px}
+
   .logo{width:205px}
+
   .miniLogo{width:155px}
 }
 </style>
 </head>
 
+
 <body>
 
-<section class="screen active" id="start"><div class="box">
+
+<!-- START -->
+
+<section class="screen active" id="start">
+<div class="box">
+
 <img src="logo.PNG" class="logo" alt="Academia de Chitara">
-<h1>WHAT'S YOUR<br><span class="gold">MUSIC PERSONALITY?</span></h1>
-<div class="subtitle">Take a selfie, answer 5 quick questions and discover your musical identity.</div>
-<button class="start" onclick="openCamera()">START</button>
-<div class="footer">Music Personality Booth</div>
-</div></section>
 
-<section class="screen" id="camera"><div class="box">
-<img src="logo.PNG" class="miniLogo" alt="Academia de Chitara">
-<div class="number">STEP 1</div><h2>TAKE YOUR SELFIE</h2>
-<div class="cameraBox"><video id="video" autoplay playsinline muted></video><img id="photoPreview"></div>
-<canvas id="canvas" style="display:none"></canvas>
-<button class="start" id="captureButton" onclick="takePhoto()">📸 TAKE PHOTO</button>
-<button class="start" id="useButton" onclick="usePhoto()" style="display:none">USE THIS PHOTO</button>
-<button class="secondary" id="retakeButton" onclick="retakePhoto()" style="display:none">RETAKE</button>
-<div class="cameraNote">Your photo stays on this device during this experience.</div>
-</div></section>
+<h1>
+WHAT'S YOUR<br>
+<span class="gold">MUSIC PERSONALITY?</span>
+</h1>
 
-<section class="screen" id="q1"><div class="box"><img src="logo.PNG" class="miniLogo"><div class="number">QUESTION 1 OF 5</div><h2>WHERE WOULD YOU<br>RATHER BE?</h2><button onclick="choose('stage','q2')">🎤 ON STAGE</button><button onclick="choose('studio','q2')">🎧 IN THE STUDIO</button></div></section>
-<section class="screen" id="q2"><div class="box"><img src="logo.PNG" class="miniLogo"><div class="number">QUESTION 2 OF 5</div><h2>HOW SHOULD YOUR<br>MUSIC FEEL?</h2><button onclick="choose('loud','q3')">⚡ LOUD & ENERGETIC</button><button onclick="choose('chill','q3')">🌙 CHILL & EMOTIONAL</button></div></section>
-<section class="screen" id="q3"><div class="box"><img src="logo.PNG" class="miniLogo"><div class="number">QUESTION 3 OF 5</div><h2>YOU'D RATHER...</h2><button onclick="choose('solo','q4')">⭐ PLAY SOLO</button><button onclick="choose('band','q4')">👥 PLAY IN A BAND</button></div></section>
-<section class="screen" id="q4"><div class="box"><img src="logo.PNG" class="miniLogo"><div class="number">QUESTION 4 OF 5</div><h2>WHAT ATTRACTS YOU<br>MORE?</h2><button onclick="choose('rhythm','q5')">🥁 RHYTHM</button><button onclick="choose('melody','q5')">🎶 MELODY</button></div></section>
-<section class="screen" id="q5"><div class="box"><img src="logo.PNG" class="miniLogo"><div class="number">QUESTION 5 OF 5</div><h2>YOU'D RATHER...</h2><button onclick="finish('perform')">🎤 PERFORM</button><button onclick="finish('create')">🎛️ CREATE MUSIC</button></div></section>
-
-<section class="screen" id="analysis"><div class="box">
-<img src="logo.PNG" class="miniLogo">
-<div class="analysisTitle">ANALYZING YOUR<br><span class="gold">MUSIC DNA...</span></div>
-<div class="analysisSub">Finding your musical identity</div>
-<div class="scanCircle"><img id="analysisSelfie"><div class="scanLine"></div></div>
-<div class="dnaRow"><div class="dnaLabel"><span>⚡ ENERGY</span><span id="energyLoading">0%</span></div><div class="dnaBar"><div class="dnaFill" id="energyBar"></div></div></div>
-<div class="dnaRow"><div class="dnaLabel"><span>🎤 STAGE POWER</span><span id="stageLoading">0%</span></div><div class="dnaBar"><div class="dnaFill" id="stageBar"></div></div></div>
-<div class="dnaRow"><div class="dnaLabel"><span>🎨 CREATIVITY</span><span id="creativeLoading">0%</span></div><div class="dnaBar"><div class="dnaFill" id="creativeBar"></div></div></div>
-<div class="dnaRow"><div class="dnaLabel"><span>🤝 TEAM SPIRIT</span><span id="teamLoading">0%</span></div><div class="dnaBar"><div class="dnaFill" id="teamBar"></div></div></div>
-</div></section>
-
-<section class="screen" id="result"><div class="box reveal">
-<img src="logo.PNG" class="miniLogo">
-<div class="number">YOUR MUSIC PERSONALITY</div>
-<img id="resultSelfie" class="resultSelfie">
-<div class="resultIcon" id="resultIcon"></div>
-<div class="instrument" id="resultInstrument"></div>
-<div class="archetype" id="resultArchetype"></div>
-<div class="resultText" id="resultText"></div>
-
-<div class="resultPanel"><div class="panelTitle">YOUR MUSIC DNA</div>
-<div class="stat"><div class="statTop"><span>⚡ Energy</span><span id="energyValue"></span></div><div class="statTrack"><div class="statFill" id="energyResult"></div></div></div>
-<div class="stat"><div class="statTop"><span>🎤 Stage Power</span><span id="stageValue"></span></div><div class="statTrack"><div class="statFill" id="stageResult"></div></div></div>
-<div class="stat"><div class="statTop"><span>🎨 Creativity</span><span id="creativeValue"></span></div><div class="statTrack"><div class="statFill" id="creativeResult"></div></div></div>
-<div class="stat"><div class="statTop"><span>🤝 Team Spirit</span><span id="teamValue"></span></div><div class="statTrack"><div class="statFill" id="teamResult"></div></div></div>
+<div class="subtitle">
+Take a selfie, answer 5 quick questions and discover your musical identity.
 </div>
 
-<div class="challenge"><div class="challengeTitle">YOUR MUSIC CHALLENGE</div><div class="challengeMain" id="challengeMain"></div><div class="challengeText" id="challengeText"></div></div>
+<button class="start" onclick="openCamera()">
+START
+</button>
 
-<button class="start" onclick="makeMusicCard()">GET MY MUSIC CARD</button>
-<button class="secondary" onclick="restart()">TRY AGAIN</button>
-<div class="footer">AcademiaDeChitara.ro</div>
-</div></section>
+<div class="footer">
+Music Personality Booth
+</div>
 
-<section class="screen" id="musicCard"><div class="box reveal">
+</div>
+</section>
+
+
+
+<!-- CAMERA -->
+
+<section class="screen" id="camera">
+<div class="box">
+
 <img src="logo.PNG" class="miniLogo">
-<div class="number">YOUR PERSONAL MUSIC CARD</div>
-<img id="cardPreview" class="cardPreview" alt="Music Personality Card">
-<div class="cardHint">Your card is created on this device. No AI is used.</div>
-<button class="start" onclick="shareCard()">SHARE CARD</button>
-<button class="secondary" onclick="openCardImage()">OPEN / SAVE IMAGE</button>
-<button class="secondary" onclick="go('result')">BACK TO RESULT</button>
-<div class="footer">AcademiaDeChitara.ro</div>
-</div></section>
 
-<canvas id="musicCardCanvas" class="hiddenCanvas" width="1080" height="1920"></canvas>
+<div class="number">STEP 1</div>
+
+<h2>TAKE YOUR SELFIE</h2>
+
+<div class="cameraBox">
+
+<video
+id="video"
+autoplay
+playsinline
+muted>
+</video>
+
+<img id="photoPreview">
+
+</div>
+
+<canvas id="canvas" style="display:none"></canvas>
+
+<button
+class="start"
+id="captureButton"
+onclick="takePhoto()">
+📸 TAKE PHOTO
+</button>
+
+<button
+class="start"
+id="useButton"
+onclick="usePhoto()"
+style="display:none">
+USE THIS PHOTO
+</button>
+
+<button
+class="secondary"
+id="retakeButton"
+onclick="retakePhoto()"
+style="display:none">
+RETAKE
+</button>
+
+<div class="cameraNote">
+Your photo stays on this device during this experience.
+</div>
+
+</div>
+</section>
+
+
+
+<!-- QUESTIONS -->
+
+<section class="screen" id="q1">
+<div class="box">
+
+<img src="logo.PNG" class="miniLogo">
+
+<div class="number">
+QUESTION 1 OF 5
+</div>
+
+<h2>
+WHERE WOULD YOU<br>
+RATHER BE?
+</h2>
+
+<button onclick="choose('stage','q2')">
+🎤 ON STAGE
+</button>
+
+<button onclick="choose('studio','q2')">
+🎧 IN THE STUDIO
+</button>
+
+</div>
+</section>
+
+
+
+<section class="screen" id="q2">
+<div class="box">
+
+<img src="logo.PNG" class="miniLogo">
+
+<div class="number">
+QUESTION 2 OF 5
+</div>
+
+<h2>
+HOW SHOULD YOUR<br>
+MUSIC FEEL?
+</h2>
+
+<button onclick="choose('loud','q3')">
+⚡ LOUD & ENERGETIC
+</button>
+
+<button onclick="choose('chill','q3')">
+🌙 CHILL & EMOTIONAL
+</button>
+
+</div>
+</section>
+
+
+
+<section class="screen" id="q3">
+<div class="box">
+
+<img src="logo.PNG" class="miniLogo">
+
+<div class="number">
+QUESTION 3 OF 5
+</div>
+
+<h2>YOU'D RATHER...</h2>
+
+<button onclick="choose('solo','q4')">
+⭐ PLAY SOLO
+</button>
+
+<button onclick="choose('band','q4')">
+👥 PLAY IN A BAND
+</button>
+
+</div>
+</section>
+
+
+
+<section class="screen" id="q4">
+<div class="box">
+
+<img src="logo.PNG" class="miniLogo">
+
+<div class="number">
+QUESTION 4 OF 5
+</div>
+
+<h2>
+WHAT ATTRACTS YOU<br>
+MORE?
+</h2>
+
+<button onclick="choose('rhythm','q5')">
+🥁 RHYTHM
+</button>
+
+<button onclick="choose('melody','q5')">
+🎶 MELODY
+</button>
+
+</div>
+</section>
+
+
+
+<section class="screen" id="q5">
+<div class="box">
+
+<img src="logo.PNG" class="miniLogo">
+
+<div class="number">
+QUESTION 5 OF 5
+</div>
+
+<h2>YOU'D RATHER...</h2>
+
+<button onclick="finish('perform')">
+🎤 PERFORM
+</button>
+
+<button onclick="finish('create')">
+🎛️ CREATE MUSIC
+</button>
+
+</div>
+</section>
+
+
+
+<!-- ANALYSIS -->
+
+<section class="screen" id="analysis">
+<div class="box">
+
+<img src="logo.PNG" class="miniLogo">
+
+<div class="analysisTitle">
+ANALYZING YOUR<br>
+<span class="gold">MUSIC DNA...</span>
+</div>
+
+<div class="analysisSub">
+Finding your musical identity
+</div>
+
+<div class="scanCircle">
+
+<img id="analysisSelfie">
+
+<div class="scanLine"></div>
+
+</div>
+
+
+<div class="dnaRow">
+
+<div class="dnaLabel">
+<span>⚡ ENERGY</span>
+<span id="energyLoading">0%</span>
+</div>
+
+<div class="dnaBar">
+<div class="dnaFill" id="energyBar"></div>
+</div>
+
+</div>
+
+
+<div class="dnaRow">
+
+<div class="dnaLabel">
+<span>🎤 STAGE POWER</span>
+<span id="stageLoading">0%</span>
+</div>
+
+<div class="dnaBar">
+<div class="dnaFill" id="stageBar"></div>
+</div>
+
+</div>
+
+
+<div class="dnaRow">
+
+<div class="dnaLabel">
+<span>🎨 CREATIVITY</span>
+<span id="creativeLoading">0%</span>
+</div>
+
+<div class="dnaBar">
+<div class="dnaFill" id="creativeBar"></div>
+</div>
+
+</div>
+
+
+<div class="dnaRow">
+
+<div class="dnaLabel">
+<span>🤝 TEAM SPIRIT</span>
+<span id="teamLoading">0%</span>
+</div>
+
+<div class="dnaBar">
+<div class="dnaFill" id="teamBar"></div>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+
+<!-- RESULT -->
+
+<section class="screen" id="result">
+<div class="box reveal">
+
+<img src="logo.PNG" class="miniLogo">
+
+<div class="number">
+YOUR MUSIC PERSONALITY
+</div>
+
+<img
+id="resultSelfie"
+class="resultSelfie">
+
+<div
+class="resultIcon"
+id="resultIcon">
+</div>
+
+<div
+class="instrument"
+id="resultInstrument">
+</div>
+
+<div
+class="archetype"
+id="resultArchetype">
+</div>
+
+<div
+class="resultText"
+id="resultText">
+</div>
+
+
+<div class="resultPanel">
+
+<div class="panelTitle">
+YOUR MUSIC DNA
+</div>
+
+
+<div class="stat">
+
+<div class="statTop">
+<span>⚡ Energy</span>
+<span id="energyValue"></span>
+</div>
+
+<div class="statTrack">
+<div class="statFill" id="energyResult"></div>
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div class="statTop">
+<span>🎤 Stage Power</span>
+<span id="stageValue"></span>
+</div>
+
+<div class="statTrack">
+<div class="statFill" id="stageResult"></div>
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div class="statTop">
+<span>🎨 Creativity</span>
+<span id="creativeValue"></span>
+</div>
+
+<div class="statTrack">
+<div class="statFill" id="creativeResult"></div>
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div class="statTop">
+<span>🤝 Team Spirit</span>
+<span id="teamValue"></span>
+</div>
+
+<div class="statTrack">
+<div class="statFill" id="teamResult"></div>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="challenge">
+
+<div class="challengeTitle">
+YOUR MUSIC CHALLENGE
+</div>
+
+<div
+class="challengeMain"
+id="challengeMain">
+</div>
+
+<div
+class="challengeText"
+id="challengeText">
+</div>
+
+</div>
+
+
+<button
+class="start"
+onclick="makeMusicCard()">
+GET MY MUSIC CARD
+</button>
+
+<button
+class="secondary"
+onclick="restart()">
+TRY AGAIN
+</button>
+
+<div class="footer">
+AcademiaDeChitara.ro
+</div>
+
+</div>
+</section>
+
+
+
+<!-- FINAL LANDSCAPE CARD -->
+
+<section class="screen" id="musicCard">
+<div class="musicCardBox reveal">
+
+<div class="cardTitle">
+YOUR PERSONAL MUSIC CARD
+</div>
+
+<img
+id="cardPreview"
+class="cardPreview"
+alt="Music Personality Card">
+
+<div class="cardHint">
+Share your Music Personality Card with your friends.
+</div>
+
+<button
+class="start"
+onclick="shareCard()">
+SHARE CARD
+</button>
+
+<button
+class="secondary"
+onclick="openCardImage()">
+OPEN / SAVE IMAGE
+</button>
+
+<button
+class="secondary"
+onclick="go('result')">
+BACK TO RESULT
+</button>
+
+</div>
+</section>
+
+
+<canvas
+id="musicCardCanvas"
+class="hiddenCanvas"
+width="1600"
+height="900">
+</canvas>
+
+
 
 <script>
-let stream=null,selfieData=null,answers=[],lastResult=null,lastDNA=null,cardBlob=null,cardDataUrl=null;
-let scores={electric:0,acoustic:0,piano:0,bass:0,drums:0,ukulele:0,voice:0,production:0};
+
+let stream=null;
+let selfieData=null;
+let answers=[];
+let lastResult=null;
+let lastDNA=null;
+let cardBlob=null;
+let cardDataUrl=null;
+
+let scores={
+electric:0,
+acoustic:0,
+piano:0,
+bass:0,
+drums:0,
+ukulele:0,
+voice:0,
+production:0
+};
+
 
 function go(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  window.scrollTo(0,0);
+
+document
+.querySelectorAll('.screen')
+.forEach(s=>s.classList.remove('active'));
+
+document
+.getElementById(id)
+.classList.add('active');
+
+window.scrollTo(0,0);
+
 }
+
+
 
 async function openCamera(){
-  go('camera');
-  try{
-    stream=await navigator.mediaDevices.getUserMedia({
-      video:{facingMode:"user",width:{ideal:1080},height:{ideal:1440}},
-      audio:false
-    });
-    document.getElementById('video').srcObject=stream;
-  }catch(error){
-    alert("Camera access is required. Please allow camera permission and try again.");
-  }
+
+go('camera');
+
+try{
+
+stream=
+await navigator.mediaDevices.getUserMedia({
+
+video:{
+facingMode:"user",
+width:{ideal:1080},
+height:{ideal:1440}
+},
+
+audio:false
+
+});
+
+document.getElementById('video').srcObject=stream;
+
 }
+
+catch(error){
+
+alert(
+"Camera access is required. Please allow camera permission and try again."
+);
+
+}
+
+}
+
+
 
 function takePhoto(){
-  const video=document.getElementById('video');
-  const canvas=document.getElementById('canvas');
-  const preview=document.getElementById('photoPreview');
-  if(!video.videoWidth){alert("Camera is still starting. Please try again.");return;}
-  canvas.width=video.videoWidth;
-  canvas.height=video.videoHeight;
-  canvas.getContext('2d').drawImage(video,0,0,canvas.width,canvas.height);
-  selfieData=canvas.toDataURL('image/jpeg',0.88);
-  preview.src=selfieData;
-  preview.style.display='block';
-  video.style.display='none';
-  document.getElementById('captureButton').style.display='none';
-  document.getElementById('useButton').style.display='block';
-  document.getElementById('retakeButton').style.display='block';
-  stopCamera();
+
+const video=
+document.getElementById('video');
+
+const canvas=
+document.getElementById('canvas');
+
+const preview=
+document.getElementById('photoPreview');
+
+
+if(!video.videoWidth){
+
+alert(
+"Camera is still starting. Please try again."
+);
+
+return;
+
 }
+
+
+canvas.width=
+video.videoWidth;
+
+canvas.height=
+video.videoHeight;
+
+
+canvas
+.getContext('2d')
+.drawImage(
+video,
+0,
+0,
+canvas.width,
+canvas.height
+);
+
+
+selfieData=
+canvas.toDataURL(
+'image/jpeg',
+0.88
+);
+
+
+preview.src=
+selfieData;
+
+preview.style.display=
+'block';
+
+video.style.display=
+'none';
+
+
+document
+.getElementById('captureButton')
+.style.display='none';
+
+document
+.getElementById('useButton')
+.style.display='block';
+
+document
+.getElementById('retakeButton')
+.style.display='block';
+
+
+stopCamera();
+
+}
+
+
 
 function usePhoto(){
-  document.getElementById('resultSelfie').src=selfieData;
-  document.getElementById('analysisSelfie').src=selfieData;
-  go('q1');
+
+document
+.getElementById('resultSelfie')
+.src=selfieData;
+
+document
+.getElementById('analysisSelfie')
+.src=selfieData;
+
+go('q1');
+
 }
+
+
 
 async function retakePhoto(){
-  selfieData=null;
-  document.getElementById('photoPreview').style.display='none';
-  document.getElementById('video').style.display='block';
-  document.getElementById('captureButton').style.display='block';
-  document.getElementById('useButton').style.display='none';
-  document.getElementById('retakeButton').style.display='none';
-  await openCamera();
+
+selfieData=null;
+
+document
+.getElementById('photoPreview')
+.style.display='none';
+
+document
+.getElementById('video')
+.style.display='block';
+
+document
+.getElementById('captureButton')
+.style.display='block';
+
+document
+.getElementById('useButton')
+.style.display='none';
+
+document
+.getElementById('retakeButton')
+.style.display='none';
+
+await openCamera();
+
 }
+
+
 
 function stopCamera(){
-  if(stream){
-    stream.getTracks().forEach(track=>track.stop());
-    stream=null;
-  }
+
+if(stream){
+
+stream
+.getTracks()
+.forEach(track=>track.stop());
+
+stream=null;
+
 }
+
+}
+
+
 
 function choose(choice,next){
-  answers.push(choice);
-  applyScore(choice);
-  go(next);
+
+answers.push(choice);
+
+applyScore(choice);
+
+go(next);
+
 }
+
+
 
 function finish(choice){
-  answers.push(choice);
-  applyScore(choice);
-  startAnalysis();
+
+answers.push(choice);
+
+applyScore(choice);
+
+startAnalysis();
+
 }
+
+
 
 function applyScore(c){
-  if(c==='stage'){scores.electric+=3;scores.drums+=2;scores.voice+=3;scores.acoustic+=1}
-  if(c==='studio'){scores.piano+=2;scores.production+=4;scores.bass+=1;scores.acoustic+=1}
-  if(c==='loud'){scores.electric+=4;scores.drums+=4;scores.bass+=2}
-  if(c==='chill'){scores.piano+=3;scores.acoustic+=3;scores.ukulele+=3;scores.voice+=1;scores.production+=1}
-  if(c==='solo'){scores.piano+=3;scores.voice+=3;scores.acoustic+=2;scores.electric+=1}
-  if(c==='band'){scores.bass+=4;scores.drums+=3;scores.electric+=3;scores.ukulele+=1}
-  if(c==='rhythm'){scores.drums+=5;scores.bass+=4;scores.production+=2;scores.ukulele+=1}
-  if(c==='melody'){scores.piano+=4;scores.voice+=3;scores.acoustic+=3;scores.electric+=2;scores.ukulele+=2}
-  if(c==='perform'){scores.voice+=4;scores.electric+=3;scores.drums+=3;scores.acoustic+=2;scores.piano+=1}
-  if(c==='create'){scores.production+=6;scores.piano+=2;scores.acoustic+=1;scores.bass+=1}
+
+if(c==='stage'){
+scores.electric+=3;
+scores.drums+=2;
+scores.voice+=3;
+scores.acoustic+=1;
 }
+
+if(c==='studio'){
+scores.piano+=2;
+scores.production+=4;
+scores.bass+=1;
+scores.acoustic+=1;
+}
+
+if(c==='loud'){
+scores.electric+=4;
+scores.drums+=4;
+scores.bass+=2;
+}
+
+if(c==='chill'){
+scores.piano+=3;
+scores.acoustic+=3;
+scores.ukulele+=3;
+scores.voice+=1;
+scores.production+=1;
+}
+
+if(c==='solo'){
+scores.piano+=3;
+scores.voice+=3;
+scores.acoustic+=2;
+scores.electric+=1;
+}
+
+if(c==='band'){
+scores.bass+=4;
+scores.drums+=3;
+scores.electric+=3;
+scores.ukulele+=1;
+}
+
+if(c==='rhythm'){
+scores.drums+=5;
+scores.bass+=4;
+scores.production+=2;
+scores.ukulele+=1;
+}
+
+if(c==='melody'){
+scores.piano+=4;
+scores.voice+=3;
+scores.acoustic+=3;
+scores.electric+=2;
+scores.ukulele+=2;
+}
+
+if(c==='perform'){
+scores.voice+=4;
+scores.electric+=3;
+scores.drums+=3;
+scores.acoustic+=2;
+scores.piano+=1;
+}
+
+if(c==='create'){
+scores.production+=6;
+scores.piano+=2;
+scores.acoustic+=1;
+scores.bass+=1;
+}
+
+}
+
+
 
 function calculateDNA(){
-  let d={energy:55,stage:55,creative:60,team:55};
-  if(answers.includes('loud'))d.energy+=30;
-  if(answers.includes('chill'))d.energy+=8;
-  if(answers.includes('stage'))d.stage+=30;
-  if(answers.includes('perform'))d.stage+=15;
-  if(answers.includes('studio'))d.creative+=15;
-  if(answers.includes('create'))d.creative+=25;
-  if(answers.includes('melody'))d.creative+=12;
-  if(answers.includes('band'))d.team+=30;
-  if(answers.includes('solo'))d.team+=5;
-  if(answers.includes('rhythm'))d.team+=10;
-  Object.keys(d).forEach(k=>d[k]=Math.min(98,Math.max(61,d[k])));
-  return d;
+
+let d={
+energy:55,
+stage:55,
+creative:60,
+team:55
+};
+
+if(answers.includes('loud'))
+d.energy+=30;
+
+if(answers.includes('chill'))
+d.energy+=8;
+
+if(answers.includes('stage'))
+d.stage+=30;
+
+if(answers.includes('perform'))
+d.stage+=15;
+
+if(answers.includes('studio'))
+d.creative+=15;
+
+if(answers.includes('create'))
+d.creative+=25;
+
+if(answers.includes('melody'))
+d.creative+=12;
+
+if(answers.includes('band'))
+d.team+=30;
+
+if(answers.includes('solo'))
+d.team+=5;
+
+if(answers.includes('rhythm'))
+d.team+=10;
+
+
+Object
+.keys(d)
+.forEach(k=>
+d[k]=Math.min(
+98,
+Math.max(61,d[k])
+)
+);
+
+
+return d;
+
 }
+
+
 
 function startAnalysis(){
-  go('analysis');
-  const d=calculateDNA();
-  setTimeout(()=>animateDNA('energy',d.energy),200);
-  setTimeout(()=>animateDNA('stage',d.stage),500);
-  setTimeout(()=>animateDNA('creative',d.creative),800);
-  setTimeout(()=>animateDNA('team',d.team),1100);
-  setTimeout(showResult,3200);
+
+go('analysis');
+
+const d=
+calculateDNA();
+
+
+setTimeout(
+()=>animateDNA(
+'energy',
+d.energy
+),
+200
+);
+
+setTimeout(
+()=>animateDNA(
+'stage',
+d.stage
+),
+500
+);
+
+setTimeout(
+()=>animateDNA(
+'creative',
+d.creative
+),
+800
+);
+
+setTimeout(
+()=>animateDNA(
+'team',
+d.team
+),
+1100
+);
+
+setTimeout(
+showResult,
+3200
+);
+
 }
+
+
 
 function animateDNA(type,value){
-  document.getElementById(type+'Bar').style.width=value+'%';
-  let current=0;
-  const text=document.getElementById(type+'Loading');
-  const timer=setInterval(()=>{
-    current=Math.min(value,current+2);
-    text.innerText=current+'%';
-    if(current>=value)clearInterval(timer);
-  },20);
+
+document
+.getElementById(type+'Bar')
+.style.width=
+value+'%';
+
+
+let current=0;
+
+const text=
+document.getElementById(
+type+'Loading'
+);
+
+
+const timer=
+setInterval(()=>{
+
+current=
+Math.min(
+value,
+current+2
+);
+
+text.innerText=
+current+'%';
+
+if(current>=value)
+clearInterval(timer);
+
+},20);
+
 }
+
+
 
 function getResultData(){
-  return {
-    electric:{name:"ELECTRIC GUITAR",icon:"🎸",archetype:"THE ROCKSTAR",text:"Bold, energetic and expressive. You were made to make an impact.",challenge:"Play your first riff!",challengeText:"Find the electric guitar at the Academia de Chitară booth and give it a try."},
-    acoustic:{name:"ACOUSTIC GUITAR",icon:"🎸",archetype:"THE STORYTELLER",text:"Warm, expressive and versatile. Music is how you connect with people.",challenge:"Play your first chord!",challengeText:"Find an acoustic guitar at the Academia de Chitară booth and discover your first chord."},
-    piano:{name:"PIANO",icon:"🎹",archetype:"THE CREATOR",text:"Focused, expressive and imaginative. You like turning ideas into melodies.",challenge:"Play your first melody!",challengeText:"Find the piano at the Academia de Chitară booth and create your first few notes."},
-    bass:{name:"BASS",icon:"🎸",archetype:"THE GROOVE MASTER",text:"Steady, rhythmic and essential. You feel the music from the inside.",challenge:"Find your first groove!",challengeText:"Try the bass at the Academia de Chitară booth and feel what holds a band together."},
-    drums:{name:"DRUMS",icon:"🥁",archetype:"THE POWERHOUSE",text:"Powerful, instinctive and energetic. Rhythm is your natural language.",challenge:"Play your first beat!",challengeText:"Sit behind the drums at the Academia de Chitară booth and show us your rhythm."},
-    ukulele:{name:"UKULELE",icon:"🌴",archetype:"THE GOOD VIBE",text:"Positive, spontaneous and social. You bring good energy wherever you play.",challenge:"Play your first happy chord!",challengeText:"Find the ukulele and discover how quickly you can make music."},
-    voice:{name:"VOICE",icon:"🎤",archetype:"THE STAR VOICE",text:"Expressive, emotional and confident. Your personality comes through directly in the music.",challenge:"Sing your first chorus!",challengeText:"Meet the vocal teacher at the Academia de Chitară booth and give your voice a try."},
-    production:{name:"MUSIC PRODUCTION",icon:"🎛️",archetype:"THE PRODUCER",text:"Creative, curious and detail-oriented. You like building music from the ground up.",challenge:"Build your first beat!",challengeText:"Discover how songs are created at the Academia de Chitară booth."}
-  };
+
+return{
+
+electric:{
+name:"ELECTRIC GUITAR",
+icon:"🎸",
+archetype:"THE ROCKSTAR",
+text:"Bold, energetic and expressive. You were made to make an impact.",
+challenge:"Play your first riff!",
+challengeText:"Find the electric guitar at the Academia de Chitară booth and give it a try."
+},
+
+acoustic:{
+name:"ACOUSTIC GUITAR",
+icon:"🎸",
+archetype:"THE STORYTELLER",
+text:"Warm, expressive and versatile. Music is how you connect with people.",
+challenge:"Play your first chord!",
+challengeText:"Find an acoustic guitar at the Academia de Chitară booth and discover your first chord."
+},
+
+piano:{
+name:"PIANO",
+icon:"🎹",
+archetype:"THE CREATOR",
+text:"Focused, expressive and imaginative. You like turning ideas into melodies.",
+challenge:"Play your first melody!",
+challengeText:"Find the piano at the Academia de Chitară booth and create your first few notes."
+},
+
+bass:{
+name:"BASS",
+icon:"🎸",
+archetype:"THE GROOVE MASTER",
+text:"Steady, rhythmic and essential. You feel the music from the inside.",
+challenge:"Find your first groove!",
+challengeText:"Try the bass at the Academia de Chitară booth and feel what holds a band together."
+},
+
+drums:{
+name:"DRUMS",
+icon:"🥁",
+archetype:"THE POWERHOUSE",
+text:"Powerful, instinctive and energetic. Rhythm is your natural language.",
+challenge:"Play your first beat!",
+challengeText:"Sit behind the drums at the Academia de Chitară booth and show us your rhythm."
+},
+
+ukulele:{
+name:"UKULELE",
+icon:"🌴",
+archetype:"THE GOOD VIBE",
+text:"Positive, spontaneous and social. You bring good energy wherever you play.",
+challenge:"Play your first happy chord!",
+challengeText:"Find the ukulele and discover how quickly you can make music."
+},
+
+voice:{
+name:"VOICE",
+icon:"🎤",
+archetype:"THE STAR VOICE",
+text:"Expressive, emotional and confident. Your personality comes through directly in the music.",
+challenge:"Sing your first chorus!",
+challengeText:"Meet the vocal teacher at the Academia de Chitară booth and give your voice a try."
+},
+
+production:{
+name:"MUSIC PRODUCTION",
+icon:"🎛️",
+archetype:"THE PRODUCER",
+text:"Creative, curious and detail-oriented. You like building music from the ground up.",
+challenge:"Build your first beat!",
+challengeText:"Discover how songs are created at the Academia de Chitară booth."
 }
+
+};
+
+}
+
+
 
 function showResult(){
-  const winner=Object.keys(scores).reduce((a,b)=>scores[a]>scores[b]?a:b);
-  const r=getResultData()[winner];
-  const d=calculateDNA();
-  lastResult=r;
-  lastDNA=d;
 
-  document.getElementById('resultIcon').innerText=r.icon;
-  document.getElementById('resultInstrument').innerText=r.name;
-  document.getElementById('resultArchetype').innerText=r.archetype;
-  document.getElementById('resultText').innerText=r.text;
-  document.getElementById('challengeMain').innerText=r.challenge;
-  document.getElementById('challengeText').innerText=r.challengeText;
-  ['energy','stage','creative','team'].forEach(k=>document.getElementById(k+'Value').innerText=d[k]+'%');
+const winner=
+Object
+.keys(scores)
+.reduce(
+(a,b)=>
+scores[a]>scores[b]
+?a:b
+);
 
-  go('result');
 
-  setTimeout(()=>{
-    ['energy','stage','creative','team'].forEach(k=>{
-      document.getElementById(k+'Result').style.width=d[k]+'%';
-    });
-  },150);
+const r=
+getResultData()[winner];
+
+const d=
+calculateDNA();
+
+
+lastResult=r;
+lastDNA=d;
+
+
+document
+.getElementById('resultIcon')
+.innerText=r.icon;
+
+document
+.getElementById('resultInstrument')
+.innerText=r.name;
+
+document
+.getElementById('resultArchetype')
+.innerText=r.archetype;
+
+document
+.getElementById('resultText')
+.innerText=r.text;
+
+document
+.getElementById('challengeMain')
+.innerText=r.challenge;
+
+document
+.getElementById('challengeText')
+.innerText=r.challengeText;
+
+
+[
+'energy',
+'stage',
+'creative',
+'team'
+]
+.forEach(k=>
+
+document
+.getElementById(k+'Value')
+.innerText=
+d[k]+'%'
+
+);
+
+
+go('result');
+
+
+setTimeout(()=>{
+
+[
+'energy',
+'stage',
+'creative',
+'team'
+]
+.forEach(k=>{
+
+document
+.getElementById(k+'Result')
+.style.width=
+d[k]+'%';
+
+});
+
+},150);
+
 }
+
+
 
 function loadImage(src){
-  return new Promise((resolve,reject)=>{
-    const img=new Image();
-    img.onload=()=>resolve(img);
-    img.onerror=reject;
-    img.src=src;
-  });
+
+return new Promise(
+(resolve,reject)=>{
+
+const img=
+new Image();
+
+img.onload=
+()=>resolve(img);
+
+img.onerror=
+reject;
+
+img.src=src;
+
+});
+
 }
 
-function roundRect(ctx,x,y,w,h,r,fill,stroke){
-  ctx.beginPath();
-  ctx.roundRect(x,y,w,h,r);
-  if(fill){ctx.fillStyle=fill;ctx.fill()}
-  if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=3;ctx.stroke()}
+
+
+function roundRect(
+ctx,
+x,
+y,
+w,
+h,
+r,
+fill,
+stroke
+){
+
+ctx.beginPath();
+
+ctx.roundRect(
+x,y,w,h,r
+);
+
+if(fill){
+
+ctx.fillStyle=fill;
+ctx.fill();
+
 }
 
-function drawCenteredText(ctx,text,y,size,color,weight="700"){
-  ctx.fillStyle=color;
-  ctx.font=`${weight} ${size}px Arial`;
-  ctx.textAlign="center";
-  ctx.fillText(text,540,y);
+if(stroke){
+
+ctx.strokeStyle=stroke;
+ctx.lineWidth=3;
+ctx.stroke();
+
 }
 
-function drawStat(ctx,label,value,y){
-  ctx.fillStyle="#ffffff";
-  ctx.font="700 34px Arial";
-  ctx.textAlign="left";
-  ctx.fillText(label,120,y);
-
-  ctx.textAlign="right";
-  ctx.fillText(value+"%",960,y);
-
-  roundRect(ctx,120,y+24,840,18,9,"#2a2a2a");
-  roundRect(ctx,120,y+24,840*(value/100),18,9,"#dcb631");
 }
+
+
+
+function drawCardStat(
+ctx,
+label,
+value,
+x,
+y,
+width
+){
+
+ctx.fillStyle="#ffffff";
+
+ctx.font=
+"700 26px Arial";
+
+ctx.textAlign=
+"left";
+
+ctx.fillText(
+label,
+x,
+y
+);
+
+
+ctx.textAlign=
+"right";
+
+ctx.fillText(
+value+"%",
+x+width,
+y
+);
+
+
+roundRect(
+ctx,
+x,
+y+15,
+width,
+13,
+7,
+"#292929"
+);
+
+
+roundRect(
+ctx,
+x,
+y+15,
+width*(value/100),
+13,
+7,
+"#dcb631"
+);
+
+}
+
+
+
+/* QR GENERATOR */
+
+async function loadQR(url){
+
+const qrURL=
+"https://api.qrserver.com/v1/create-qr-code/?size=300x300&data="
++
+encodeURIComponent(url);
+
+return await loadImage(qrURL);
+
+}
+
+
+
+/* LANDSCAPE MUSIC CARD */
 
 async function makeMusicCard(){
-  if(!selfieData || !lastResult || !lastDNA){
-    alert("Please complete the quiz first.");
-    return;
-  }
 
-  const canvas=document.getElementById('musicCardCanvas');
-  const ctx=canvas.getContext('2d');
-  const W=1080,H=1920;
+if(
+!selfieData ||
+!lastResult ||
+!lastDNA
+){
 
-  ctx.clearRect(0,0,W,H);
+alert(
+"Please complete the quiz first."
+);
 
-  const grad=ctx.createLinearGradient(0,0,0,H);
-  grad.addColorStop(0,"#050505");
-  grad.addColorStop(1,"#111111");
-  ctx.fillStyle=grad;
-  ctx.fillRect(0,0,W,H);
+return;
 
-  // Gold frame
-  ctx.strokeStyle="#dcb631";
-  ctx.lineWidth=6;
-  roundRect(ctx,42,42,W-84,H-84,34,null,"#dcb631");
-
-  // Logo
-  try{
-    const logo=await loadImage("logo.PNG");
-    const maxW=520;
-    const ratio=logo.width/logo.height;
-    const logoW=maxW;
-    const logoH=logoW/ratio;
-    ctx.drawImage(logo,(W-logoW)/2,85,logoW,logoH);
-  }catch(e){}
-
-  drawCenteredText(ctx,"YOUR MUSIC PERSONALITY",360,34,"#dcb631","700");
-
-  // Selfie circular crop
-  const selfie=await loadImage(selfieData);
-  const cx=540,cy=580,r=180;
-  ctx.save();
-  ctx.beginPath();
-  ctx.arc(cx,cy,r,0,Math.PI*2);
-  ctx.closePath();
-  ctx.clip();
-
-  const sw=selfie.width, sh=selfie.height;
-  const scale=Math.max((r*2)/sw,(r*2)/sh);
-  const dw=sw*scale, dh=sh*scale;
-  ctx.drawImage(selfie,cx-dw/2,cy-dh/2,dw,dh);
-  ctx.restore();
-
-  ctx.beginPath();
-  ctx.arc(cx,cy,r+5,0,Math.PI*2);
-  ctx.strokeStyle="#dcb631";
-  ctx.lineWidth=10;
-  ctx.stroke();
-
-  drawCenteredText(ctx,lastResult.icon,835,95,"#ffffff","700");
-  drawCenteredText(ctx,lastResult.name,950,72,"#dcb631","900");
-  drawCenteredText(ctx,lastResult.archetype,1020,40,"#ffffff","700");
-
-  // DNA panel
-  roundRect(ctx,80,1090,920,470,34,"#121212","#2f2f2f");
-  drawCenteredText(ctx,"YOUR MUSIC DNA",1165,38,"#dcb631","700");
-
-  drawStat(ctx,"⚡ Energy",lastDNA.energy,1245);
-  drawStat(ctx,"🎤 Stage Power",lastDNA.stage,1335);
-  drawStat(ctx,"🎨 Creativity",lastDNA.creative,1425);
-  drawStat(ctx,"🤝 Team Spirit",lastDNA.team,1515);
-
-  // Challenge
-  ctx.strokeStyle="#dcb631";
-  ctx.lineWidth=4;
-  roundRect(ctx,80,1605,920,190,30,"#050505","#dcb631");
-  drawCenteredText(ctx,"YOUR MUSIC CHALLENGE",1660,30,"#dcb631","700");
-  drawCenteredText(ctx,lastResult.challenge,1730,46,"#ffffff","800");
-
-  drawCenteredText(ctx,"AcademiaDeChitara.ro",1855,32,"#8c8c8c","700");
-
-  cardDataUrl=canvas.toDataURL("image/png");
-  document.getElementById("cardPreview").src=cardDataUrl;
-
-  cardBlob=await new Promise(resolve=>canvas.toBlob(resolve,"image/png",1));
-
-  go("musicCard");
 }
+
+
+const canvas=
+document.getElementById(
+'musicCardCanvas'
+);
+
+const ctx=
+canvas.getContext('2d');
+
+
+const W=1600;
+const H=900;
+
+
+canvas.width=W;
+canvas.height=H;
+
+
+ctx.clearRect(
+0,0,W,H
+);
+
+
+/* BACKGROUND */
+
+const grad=
+ctx.createLinearGradient(
+0,0,W,H
+);
+
+grad.addColorStop(
+0,
+"#050505"
+);
+
+grad.addColorStop(
+1,
+"#151515"
+);
+
+ctx.fillStyle=grad;
+
+ctx.fillRect(
+0,0,W,H
+);
+
+
+/* GOLD BORDER */
+
+roundRect(
+ctx,
+20,
+20,
+W-40,
+H-40,
+35,
+null,
+"#dcb631"
+);
+
+ctx.strokeStyle=
+"#dcb631";
+
+ctx.lineWidth=5;
+
+
+/* LEFT SIDE */
+
+const leftX=85;
+
+
+/* LOGO */
+
+try{
+
+const logo=
+await loadImage(
+"logo.PNG"
+);
+
+const maxW=470;
+
+const ratio=
+logo.width/logo.height;
+
+const logoW=maxW;
+
+const logoH=
+logoW/ratio;
+
+ctx.drawImage(
+logo,
+leftX,
+65,
+logoW,
+logoH
+);
+
+}catch(e){}
+
+
+/* SMALL TITLE */
+
+ctx.fillStyle=
+"#dcb631";
+
+ctx.font=
+"700 25px Arial";
+
+ctx.textAlign=
+"left";
+
+ctx.fillText(
+"YOUR MUSIC PERSONALITY",
+leftX,
+315
+);
+
+
+/* INSTRUMENT */
+
+ctx.fillStyle=
+"#dcb631";
+
+ctx.font=
+"900 58px Arial";
+
+ctx.fillText(
+lastResult.name,
+leftX,
+390
+);
+
+
+/* ARCHETYPE */
+
+ctx.fillStyle=
+"#ffffff";
+
+ctx.font=
+"700 31px Arial";
+
+ctx.fillText(
+lastResult.archetype,
+leftX,
+440
+);
+
+
+/* PERSONALITY TEXT */
+
+ctx.fillStyle=
+"#cfcfcf";
+
+ctx.font=
+"26px Arial";
+
+
+function wrapText(
+context,
+text,
+x,
+y,
+maxWidth,
+lineHeight
+){
+
+const words=
+text.split(' ');
+
+let line='';
+
+for(
+let n=0;
+n<words.length;
+n++
+){
+
+const testLine=
+line+
+words[n]+
+' ';
+
+const metrics=
+context.measureText(
+testLine
+);
+
+const testWidth=
+metrics.width;
+
+if(
+testWidth>maxWidth &&
+n>0
+){
+
+context.fillText(
+line,
+x,
+y
+);
+
+line=
+words[n]+' ';
+
+y+=lineHeight;
+
+}else{
+
+line=testLine;
+
+}
+
+}
+
+context.fillText(
+line,
+x,
+y
+);
+
+return y;
+
+}
+
+
+wrapText(
+ctx,
+lastResult.text,
+leftX,
+495,
+590,
+38
+);
+
+
+/* DNA AREA */
+
+ctx.fillStyle=
+"#dcb631";
+
+ctx.font=
+"700 24px Arial";
+
+ctx.fillText(
+"YOUR MUSIC DNA",
+leftX,
+610
+);
+
+
+drawCardStat(
+ctx,
+"⚡ Energy",
+lastDNA.energy,
+leftX,
+655,
+500
+);
+
+drawCardStat(
+ctx,
+"🎤 Stage Power",
+lastDNA.stage,
+leftX,
+710,
+500
+);
+
+drawCardStat(
+ctx,
+"🎨 Creativity",
+lastDNA.creative,
+leftX,
+765,
+500
+);
+
+drawCardStat(
+ctx,
+"🤝 Team Spirit",
+lastDNA.team,
+leftX,
+820,
+500
+);
+
+
+/* SELFIE */
+
+const selfie=
+await loadImage(
+selfieData
+);
+
+
+const photoX=790;
+const photoY=80;
+const photoW=700;
+const photoH=550;
+
+
+roundRect(
+ctx,
+photoX-6,
+photoY-6,
+photoW+12,
+photoH+12,
+32,
+"#dcb631"
+);
+
+
+ctx.save();
+
+ctx.beginPath();
+
+ctx.roundRect(
+photoX,
+photoY,
+photoW,
+photoH,
+28
+);
+
+ctx.clip();
+
+
+const scale=
+Math.max(
+photoW/selfie.width,
+photoH/selfie.height
+);
+
+const dw=
+selfie.width*scale;
+
+const dh=
+selfie.height*scale;
+
+
+ctx.drawImage(
+selfie,
+photoX+(photoW-dw)/2,
+photoY+(photoH-dh)/2,
+dw,
+dh
+);
+
+ctx.restore();
+
+
+/* BOTTOM CTA */
+
+roundRect(
+ctx,
+760,
+670,
+750,
+160,
+28,
+"#0b0b0b",
+"#dcb631"
+);
+
+
+ctx.fillStyle=
+"#dcb631";
+
+ctx.font=
+"900 34px Arial";
+
+ctx.textAlign=
+"left";
+
+ctx.fillText(
+"BOOK YOUR LESSON NOW",
+800,
+725
+);
+
+
+ctx.fillStyle=
+"#ffffff";
+
+ctx.font=
+"24px Arial";
+
+ctx.fillText(
+"at Academia de Chitară",
+800,
+765
+);
+
+
+ctx.fillStyle=
+"#999999";
+
+ctx.font=
+"21px Arial";
+
+ctx.fillText(
+"AcademiaDeChitara.ro",
+800,
+800
+);
+
+
+/* QR */
+
+try{
+
+const qr=
+await loadQR(
+"https://www.academiadechitara.ro"
+);
+
+ctx.fillStyle=
+"#ffffff";
+
+ctx.fillRect(
+1320,
+685,
+170,
+170
+);
+
+ctx.drawImage(
+qr,
+1330,
+695,
+150,
+150
+);
+
+}catch(e){
+
+ctx.fillStyle=
+"#dcb631";
+
+ctx.font=
+"20px Arial";
+
+ctx.fillText(
+"SCAN TO BOOK",
+1325,
+780
+);
+
+}
+
+
+/* EXPORT */
+
+cardDataUrl=
+canvas.toDataURL(
+"image/png"
+);
+
+
+document
+.getElementById(
+"cardPreview"
+)
+.src=
+cardDataUrl;
+
+
+cardBlob=
+await new Promise(
+resolve=>
+canvas.toBlob(
+resolve,
+"image/png",
+1
+)
+);
+
+
+go(
+"musicCard"
+);
+
+}
+
+
+
+/* SHARE */
 
 async function shareCard(){
-  if(!cardBlob){alert("Create the card first.");return;}
 
-  const file=new File([cardBlob],"my-music-personality.png",{type:"image/png"});
+if(!cardBlob){
 
-  try{
-    if(navigator.canShare && navigator.canShare({files:[file]}) && navigator.share){
-      await navigator.share({
-        files:[file],
-        title:"My Music Personality",
-        text:"My Music Personality — Academia de Chitară"
-      });
-    }else if(navigator.share){
-      await navigator.share({
-        title:"My Music Personality",
-        text:"My Music Personality — Academia de Chitară"
-      });
-    }else{
-      openCardImage();
-    }
-  }catch(e){
-    if(e.name!=="AbortError") openCardImage();
-  }
+alert(
+"Create the card first."
+);
+
+return;
+
 }
+
+
+const file=
+new File(
+[cardBlob],
+"my-music-personality.png",
+{
+type:"image/png"
+}
+);
+
+
+try{
+
+if(
+navigator.canShare &&
+navigator.canShare({
+files:[file]
+}) &&
+navigator.share
+){
+
+await navigator.share({
+
+files:[file],
+
+title:
+"My Music Personality",
+
+text:
+"My Music Personality — Academia de Chitară"
+
+});
+
+}
+
+else if(
+navigator.share
+){
+
+await navigator.share({
+
+title:
+"My Music Personality",
+
+text:
+"My Music Personality — Academia de Chitară"
+
+});
+
+}
+
+else{
+
+openCardImage();
+
+}
+
+}
+
+catch(e){
+
+if(
+e.name!=="AbortError"
+)
+openCardImage();
+
+}
+
+}
+
+
+
+/* OPEN IMAGE */
 
 function openCardImage(){
-  if(!cardDataUrl){alert("Create the card first.");return;}
-  const w=window.open();
-  if(w){
-    w.document.write('<title>My Music Personality</title><body style="margin:0;background:#000;text-align:center"><img src="'+cardDataUrl+'" style="width:100%;max-width:540px;height:auto"></body>');
-    w.document.close();
-  }else{
-    location.href=cardDataUrl;
-  }
+
+if(!cardDataUrl){
+
+alert(
+"Create the card first."
+);
+
+return;
+
 }
+
+
+const w=
+window.open();
+
+
+if(w){
+
+w.document.write(
+'<title>My Music Personality</title>'+
+'<body style="margin:0;background:#000;text-align:center">'+
+'<img src="'+
+cardDataUrl+
+'" style="width:100%;max-width:900px;height:auto">'+
+'</body>'
+);
+
+w.document.close();
+
+}
+
+else{
+
+location.href=
+cardDataUrl;
+
+}
+
+}
+
+
+
+/* RESTART */
 
 function restart(){
-  stopCamera();
-  selfieData=null;
-  answers=[];
-  lastResult=null;
-  lastDNA=null;
-  cardBlob=null;
-  cardDataUrl=null;
 
-  scores={electric:0,acoustic:0,piano:0,bass:0,drums:0,ukulele:0,voice:0,production:0};
+stopCamera();
 
-  document.getElementById('photoPreview').style.display='none';
-  document.getElementById('video').style.display='block';
-  document.getElementById('captureButton').style.display='block';
-  document.getElementById('useButton').style.display='none';
-  document.getElementById('retakeButton').style.display='none';
+selfieData=null;
 
-  ['energyBar','stageBar','creativeBar','teamBar','energyResult','stageResult','creativeResult','teamResult'].forEach(id=>{
-    document.getElementById(id).style.width='0%';
-  });
+answers=[];
 
-  ['energyLoading','stageLoading','creativeLoading','teamLoading'].forEach(id=>{
-    document.getElementById(id).innerText='0%';
-  });
+lastResult=null;
 
-  go('start');
+lastDNA=null;
+
+cardBlob=null;
+
+cardDataUrl=null;
+
+
+scores={
+electric:0,
+acoustic:0,
+piano:0,
+bass:0,
+drums:0,
+ukulele:0,
+voice:0,
+production:0
+};
+
+
+document
+.getElementById(
+'photoPreview'
+)
+.style.display=
+'none';
+
+
+document
+.getElementById(
+'video'
+)
+.style.display=
+'block';
+
+
+document
+.getElementById(
+'captureButton'
+)
+.style.display=
+'block';
+
+
+document
+.getElementById(
+'useButton'
+)
+.style.display=
+'none';
+
+
+document
+.getElementById(
+'retakeButton'
+)
+.style.display=
+'none';
+
+
+[
+'energyBar',
+'stageBar',
+'creativeBar',
+'teamBar',
+'energyResult',
+'stageResult',
+'creativeResult',
+'teamResult'
+]
+.forEach(id=>{
+
+document
+.getElementById(id)
+.style.width='0%';
+
+});
+
+
+[
+'energyLoading',
+'stageLoading',
+'creativeLoading',
+'teamLoading'
+]
+.forEach(id=>{
+
+document
+.getElementById(id)
+.innerText='0%';
+
+});
+
+
+go('start');
+
 }
+
 </script>
 
 </body>
