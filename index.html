@@ -9,387 +9,377 @@
 *{box-sizing:border-box}
 
 :root{
-  --gold:#dcb631;
-  --bg:#050505;
-  --card:#111;
+--gold:#dcb631;
+--bg:#050505;
+--card:#111
 }
 
 body{
-  margin:0;
-  background:var(--bg);
-  color:#fff;
-  font-family:Arial,Helvetica,sans-serif;
+margin:0;
+background:var(--bg);
+color:#fff;
+font-family:Arial,Helvetica,sans-serif
 }
 
 .screen{
-  display:none;
-  min-height:100vh;
-  padding:25px 24px 45px;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
+display:none;
+min-height:100vh;
+padding:25px 24px 45px;
+align-items:center;
+justify-content:center;
+text-align:center
 }
 
 .screen.active{display:flex}
 
 .box{
-  width:100%;
-  max-width:520px;
+width:100%;
+max-width:520px
 }
 
 .logo{
-  width:230px;
-  max-width:75%;
-  height:auto;
-  display:block;
-  margin:0 auto 28px;
+width:230px;
+max-width:75%;
+height:auto;
+display:block;
+margin:0 auto 28px
 }
 
 .miniLogo{
-  width:175px;
-  max-width:60%;
-  height:auto;
-  display:block;
-  margin:0 auto 28px;
+width:175px;
+max-width:60%;
+height:auto;
+display:block;
+margin:0 auto 28px
 }
 
 h1{
-  font-size:38px;
-  line-height:1.05;
-  margin:10px 0 18px;
+font-size:38px;
+line-height:1.05;
+margin:10px 0 18px
 }
 
 h2{
-  font-size:28px;
-  line-height:1.2;
-  margin:10px 0 30px;
+font-size:28px;
+line-height:1.2;
+margin:10px 0 30px
 }
 
 .gold{color:var(--gold)}
 
 .subtitle{
-  color:#ccc;
-  font-size:17px;
-  line-height:1.45;
-  margin-bottom:34px;
+color:#ccc;
+font-size:17px;
+line-height:1.45;
+margin-bottom:34px
 }
 
 .number{
-  color:var(--gold);
-  font-size:12px;
-  letter-spacing:2px;
-  font-weight:bold;
-  margin-bottom:18px;
+color:var(--gold);
+font-size:12px;
+letter-spacing:2px;
+font-weight:bold;
+margin-bottom:18px
 }
 
 button{
-  width:100%;
-  min-height:64px;
-  border-radius:15px;
-  border:1px solid var(--gold);
-  background:#141414;
-  color:#fff;
-  font-size:17px;
-  font-weight:bold;
-  padding:15px;
-  margin:8px 0;
+width:100%;
+min-height:64px;
+border-radius:15px;
+border:1px solid var(--gold);
+background:#141414;
+color:#fff;
+font-size:17px;
+font-weight:bold;
+padding:15px;
+margin:8px 0
 }
 
-button:active{
-  transform:scale(.98);
-}
+button:active{transform:scale(.98)}
 
 .start{
-  background:var(--gold);
-  color:#000;
-  border:none;
-  font-size:19px;
+background:var(--gold);
+color:#000;
+border:none;
+font-size:19px
 }
 
 .secondary{
-  background:#111;
-  color:#fff;
+background:#111;
+color:#fff
 }
 
 .footer{
-  margin-top:30px;
-  color:#666;
-  font-size:12px;
+margin-top:30px;
+color:#666;
+font-size:12px
 }
-
 
 /* CAMERA */
 
 .cameraBox{
-  width:100%;
-  max-width:360px;
-  aspect-ratio:3/4;
-  margin:0 auto 20px;
-  background:#111;
-  border:2px solid var(--gold);
-  border-radius:24px;
-  overflow:hidden;
+width:100%;
+max-width:360px;
+aspect-ratio:3/4;
+margin:0 auto 20px;
+background:#111;
+border:2px solid var(--gold);
+border-radius:24px;
+overflow:hidden
 }
 
 video,#photoPreview{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
+width:100%;
+height:100%;
+object-fit:cover;
+display:block
 }
 
 #photoPreview{display:none}
 
 .cameraNote{
-  color:#888;
-  font-size:12px;
-  margin-top:15px;
+color:#888;
+font-size:12px;
+margin-top:15px
 }
-
 
 /* ANALYSIS */
 
 .analysisTitle{
-  font-size:30px;
-  margin-bottom:10px;
+font-size:30px;
+margin-bottom:10px
 }
 
 .analysisSub{
-  color:#999;
-  margin-bottom:35px;
+color:#999;
+margin-bottom:35px
 }
 
 .scanCircle{
-  width:150px;
-  height:150px;
-  margin:20px auto 35px;
-  border-radius:50%;
-  border:3px solid var(--gold);
-  position:relative;
-  overflow:hidden;
+width:150px;
+height:150px;
+margin:20px auto 35px;
+border-radius:50%;
+border:3px solid var(--gold);
+position:relative;
+overflow:hidden
 }
 
 .scanCircle img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+width:100%;
+height:100%;
+object-fit:cover
 }
 
 .scanLine{
-  position:absolute;
-  width:100%;
-  height:3px;
-  background:var(--gold);
-  box-shadow:0 0 14px var(--gold);
-  top:0;
-  animation:scan 1.4s infinite alternate ease-in-out;
+position:absolute;
+width:100%;
+height:3px;
+background:var(--gold);
+box-shadow:0 0 14px var(--gold);
+top:0;
+animation:scan 1.4s infinite alternate ease-in-out
 }
 
 @keyframes scan{
-  from{top:4%}
-  to{top:94%}
+from{top:4%}
+to{top:94%}
 }
 
 .dnaRow{
-  text-align:left;
-  margin:22px 0;
+text-align:left;
+margin:22px 0
 }
 
 .dnaLabel{
-  display:flex;
-  justify-content:space-between;
-  font-size:14px;
-  margin-bottom:8px;
+display:flex;
+justify-content:space-between;
+font-size:14px;
+margin-bottom:8px
 }
 
 .dnaBar{
-  height:9px;
-  background:#262626;
-  border-radius:10px;
-  overflow:hidden;
+height:9px;
+background:#262626;
+border-radius:10px;
+overflow:hidden
 }
 
 .dnaFill{
-  height:100%;
-  width:0;
-  background:linear-gradient(90deg,#8f7014,var(--gold));
-  border-radius:10px;
-  transition:width 1.2s ease;
+height:100%;
+width:0;
+background:linear-gradient(90deg,#8f7014,var(--gold));
+border-radius:10px;
+transition:width 1.2s ease
 }
-
 
 /* RESULT */
 
 .resultSelfie{
-  width:150px;
-  height:150px;
-  border-radius:50%;
-  object-fit:cover;
-  border:3px solid var(--gold);
-  margin:5px auto 18px;
+width:150px;
+height:150px;
+border-radius:50%;
+object-fit:cover;
+border:3px solid var(--gold);
+margin:5px auto 18px
 }
 
 .resultIcon{
-  font-size:74px;
-  margin:8px 0;
+font-size:74px;
+margin:8px 0
 }
 
 .instrument{
-  color:var(--gold);
-  font-size:38px;
-  font-weight:900;
-  margin:8px 0 3px;
+color:var(--gold);
+font-size:38px;
+font-weight:900;
+margin:8px 0 3px
 }
 
 .archetype{
-  font-size:21px;
-  font-weight:bold;
-  letter-spacing:2px;
-  margin:8px 0 20px;
+font-size:21px;
+font-weight:bold;
+letter-spacing:2px;
+margin:8px 0 20px
 }
 
 .resultText{
-  font-size:17px;
-  line-height:1.45;
-  color:#ddd;
-  margin-bottom:28px;
+font-size:17px;
+line-height:1.45;
+color:#ddd;
+margin-bottom:28px
 }
 
 .resultPanel{
-  background:#101010;
-  border:1px solid #292929;
-  border-radius:20px;
-  padding:22px;
-  margin:18px 0;
+background:#101010;
+border:1px solid #292929;
+border-radius:20px;
+padding:22px;
+margin:18px 0
 }
 
 .panelTitle{
-  color:var(--gold);
-  font-size:15px;
-  letter-spacing:2px;
-  font-weight:bold;
-  margin-bottom:18px;
+color:var(--gold);
+font-size:15px;
+letter-spacing:2px;
+font-weight:bold;
+margin-bottom:18px
 }
 
-.stat{
-  margin:16px 0;
-}
+.stat{margin:16px 0}
 
 .statTop{
-  display:flex;
-  justify-content:space-between;
-  font-size:14px;
-  margin-bottom:7px;
+display:flex;
+justify-content:space-between;
+font-size:14px;
+margin-bottom:7px
 }
 
 .statTrack{
-  background:#272727;
-  height:8px;
-  border-radius:20px;
-  overflow:hidden;
+background:#272727;
+height:8px;
+border-radius:20px;
+overflow:hidden
 }
 
 .statFill{
-  height:100%;
-  background:var(--gold);
-  border-radius:20px;
-  width:0;
-  transition:width 1.4s ease;
+height:100%;
+background:var(--gold);
+border-radius:20px;
+width:0;
+transition:width 1.4s ease
 }
 
 .challenge{
-  border:1px solid var(--gold);
-  border-radius:20px;
-  padding:22px;
-  margin:20px 0 24px;
+border:1px solid var(--gold);
+border-radius:20px;
+padding:22px;
+margin:20px 0 24px
 }
 
 .challengeTitle{
-  color:var(--gold);
-  letter-spacing:2px;
-  font-size:13px;
-  font-weight:bold;
-  margin-bottom:12px;
+color:var(--gold);
+letter-spacing:2px;
+font-size:13px;
+font-weight:bold;
+margin-bottom:12px
 }
 
 .challengeMain{
-  font-size:21px;
-  font-weight:bold;
-  margin-bottom:9px;
+font-size:21px;
+font-weight:bold;
+margin-bottom:9px
 }
 
 .challengeText{
-  font-size:14px;
-  line-height:1.45;
-  color:#bbb;
+font-size:14px;
+line-height:1.45;
+color:#bbb
 }
 
 .reveal{
-  animation:reveal .7s ease;
+animation:reveal .7s ease
 }
 
 @keyframes reveal{
-  from{
-    opacity:0;
-    transform:scale(.93)
-  }
-  to{
-    opacity:1;
-    transform:scale(1)
-  }
+from{
+opacity:0;
+transform:scale(.93)
+}
+to{
+opacity:1;
+transform:scale(1)
+}
 }
 
-
-/* FINAL MUSIC CARD SCREEN */
+/* FINAL CARD */
 
 .musicCardBox{
-  width:100%;
-  max-width:720px;
+width:100%;
+max-width:760px
 }
 
 .cardTitle{
-  color:var(--gold);
-  font-size:13px;
-  font-weight:bold;
-  letter-spacing:3px;
-  margin-bottom:18px;
+color:var(--gold);
+font-size:13px;
+font-weight:bold;
+letter-spacing:3px;
+margin-bottom:18px
 }
 
 .cardPreview{
-  width:100%;
-  display:block;
-  margin:0 auto 22px;
-  border-radius:18px;
-  border:1px solid #333;
-  box-shadow:0 12px 40px rgba(0,0,0,.55);
+width:100%;
+display:block;
+margin:0 auto 22px;
+border-radius:16px;
+border:1px solid #333;
+box-shadow:0 12px 40px rgba(0,0,0,.55)
 }
 
 .cardHint{
-  color:#999;
-  font-size:13px;
-  line-height:1.45;
-  margin:8px 0 18px;
+color:#999;
+font-size:13px;
+line-height:1.45;
+margin:8px 0 18px
 }
 
-.hiddenCanvas{
-  display:none;
-}
+.hiddenCanvas{display:none}
 
 @media(max-width:420px){
 
-  h1{font-size:34px}
+h1{font-size:34px}
 
-  h2{font-size:25px}
+h2{font-size:25px}
 
-  .instrument{font-size:34px}
+.instrument{font-size:34px}
 
-  .logo{width:205px}
+.logo{width:205px}
 
-  .miniLogo{width:155px}
+.miniLogo{width:155px}
+
 }
 </style>
 </head>
-
 
 <body>
 
@@ -399,7 +389,7 @@ video,#photoPreview{
 <section class="screen active" id="start">
 <div class="box">
 
-<img src="logo.PNG" class="logo" alt="Academia de Chitara">
+<img src="logo.PNG" class="logo">
 
 <h1>
 WHAT'S YOUR<br>
@@ -420,7 +410,6 @@ Music Personality Booth
 
 </div>
 </section>
-
 
 
 <!-- CAMERA -->
@@ -447,7 +436,10 @@ muted>
 
 </div>
 
-<canvas id="canvas" style="display:none"></canvas>
+<canvas
+id="canvas"
+style="display:none">
+</canvas>
 
 <button
 class="start"
@@ -480,8 +472,7 @@ Your photo stays on this device during this experience.
 </section>
 
 
-
-<!-- QUESTIONS -->
+<!-- QUESTION 1 -->
 
 <section class="screen" id="q1">
 <div class="box">
@@ -509,6 +500,7 @@ RATHER BE?
 </section>
 
 
+<!-- QUESTION 2 -->
 
 <section class="screen" id="q2">
 <div class="box">
@@ -536,6 +528,7 @@ MUSIC FEEL?
 </section>
 
 
+<!-- QUESTION 3 -->
 
 <section class="screen" id="q3">
 <div class="box">
@@ -560,6 +553,7 @@ QUESTION 3 OF 5
 </section>
 
 
+<!-- QUESTION 4 -->
 
 <section class="screen" id="q4">
 <div class="box">
@@ -587,6 +581,7 @@ MORE?
 </section>
 
 
+<!-- QUESTION 5 -->
 
 <section class="screen" id="q5">
 <div class="box">
@@ -609,7 +604,6 @@ QUESTION 5 OF 5
 
 </div>
 </section>
-
 
 
 <!-- ANALYSIS -->
@@ -645,7 +639,10 @@ Finding your musical identity
 </div>
 
 <div class="dnaBar">
-<div class="dnaFill" id="energyBar"></div>
+<div
+class="dnaFill"
+id="energyBar">
+</div>
 </div>
 
 </div>
@@ -659,7 +656,10 @@ Finding your musical identity
 </div>
 
 <div class="dnaBar">
-<div class="dnaFill" id="stageBar"></div>
+<div
+class="dnaFill"
+id="stageBar">
+</div>
 </div>
 
 </div>
@@ -673,7 +673,10 @@ Finding your musical identity
 </div>
 
 <div class="dnaBar">
-<div class="dnaFill" id="creativeBar"></div>
+<div
+class="dnaFill"
+id="creativeBar">
+</div>
 </div>
 
 </div>
@@ -687,14 +690,16 @@ Finding your musical identity
 </div>
 
 <div class="dnaBar">
-<div class="dnaFill" id="teamBar"></div>
+<div
+class="dnaFill"
+id="teamBar">
+</div>
 </div>
 
 </div>
 
 </div>
 </section>
-
 
 
 <!-- RESULT -->
@@ -748,7 +753,10 @@ YOUR MUSIC DNA
 </div>
 
 <div class="statTrack">
-<div class="statFill" id="energyResult"></div>
+<div
+class="statFill"
+id="energyResult">
+</div>
 </div>
 
 </div>
@@ -762,7 +770,10 @@ YOUR MUSIC DNA
 </div>
 
 <div class="statTrack">
-<div class="statFill" id="stageResult"></div>
+<div
+class="statFill"
+id="stageResult">
+</div>
 </div>
 
 </div>
@@ -776,7 +787,10 @@ YOUR MUSIC DNA
 </div>
 
 <div class="statTrack">
-<div class="statFill" id="creativeResult"></div>
+<div
+class="statFill"
+id="creativeResult">
+</div>
 </div>
 
 </div>
@@ -790,7 +804,10 @@ YOUR MUSIC DNA
 </div>
 
 <div class="statTrack">
-<div class="statFill" id="teamResult"></div>
+<div
+class="statFill"
+id="teamResult">
+</div>
 </div>
 
 </div>
@@ -837,10 +854,10 @@ AcademiaDeChitara.ro
 </section>
 
 
-
-<!-- FINAL LANDSCAPE CARD -->
+<!-- MUSIC CARD -->
 
 <section class="screen" id="musicCard">
+
 <div class="musicCardBox reveal">
 
 <div class="cardTitle">
@@ -849,11 +866,10 @@ YOUR PERSONAL MUSIC CARD
 
 <img
 id="cardPreview"
-class="cardPreview"
-alt="Music Personality Card">
+class="cardPreview">
 
 <div class="cardHint">
-Share your Music Personality Card with your friends.
+Scan the QR code or share your Music Personality Card.
 </div>
 
 <button
@@ -875,6 +891,7 @@ BACK TO RESULT
 </button>
 
 </div>
+
 </section>
 
 
@@ -884,7 +901,6 @@ class="hiddenCanvas"
 width="1600"
 height="900">
 </canvas>
-
 
 
 <script>
@@ -897,7 +913,9 @@ let lastDNA=null;
 let cardBlob=null;
 let cardDataUrl=null;
 
+
 let scores={
+
 electric:0,
 acoustic:0,
 piano:0,
@@ -906,14 +924,23 @@ drums:0,
 ukulele:0,
 voice:0,
 production:0
+
 };
+
+
+/* REAL QR INCLUDED LOCALLY */
+
+const QR_DATA =
+"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASgAAAEsAQAAAABRBrPYAAABq0lEQVR4nO2aQY6DMAxFH6VHyAl6/5NcgT1Ab5BTlKXgIspukVJ1lKQpI8b3x2rFRy6VhZ9/tzGPP0KEQhSlKEQhSpKeKnUfEL6p7bdbvbT0CG9l67Y1u9n+lgGBDe29dtWP3Q0b0D3vfn9x9pnb0GI9F60Y0O5m+L2VwCj23P9GDxQ7gdVK/UDqprO1CPQ0f2HMOwlXpDWQ6O3yB6yZVuxqkLQXzWdvb0GPaY1/xW7p2kGA76rZsbo9+wxzDmUyOrRnEai8JYrbH4U4Wx+oR6NxuO52yhx7Dms2K8w2mWVCPR3P7T0EtUc/VVn3R0vCeB47PzXbN+yT0GHZWbk2kXS8t/GPO1+4Zh87sP0JF9x4nBzv3Y0PGeB47xbop39PQY9jJpz1nKc8t/T0GPYb3vXoEP+9jQ3uPaxPt8eZvyz7VNRnhLgNZib43x7T90NGeB4z9x5BZvaekx7GXQNtXx3m0zPYY94/6Qh3vZ0N7j2sQ0z7ysP3Q0Z4HjO3HkFu9paXHsEe/NlXw0q0P3YpxrOJ9vj9R9h/6BUIUpShEIUpShEIUpShEIU5V8qfwHNj0AOcDP1VwAAAABJRU5ErkJggg==";
 
 
 function go(id){
 
 document
 .querySelectorAll('.screen')
-.forEach(s=>s.classList.remove('active'));
+.forEach(
+s=>s.classList.remove('active')
+);
 
 document
 .getElementById(id)
@@ -935,16 +962,28 @@ stream=
 await navigator.mediaDevices.getUserMedia({
 
 video:{
+
 facingMode:"user",
-width:{ideal:1080},
-height:{ideal:1440}
+
+width:{
+ideal:1080
+},
+
+height:{
+ideal:1440
+}
+
 },
 
 audio:false
 
 });
 
-document.getElementById('video').srcObject=stream;
+
+document
+.getElementById('video')
+.srcObject=
+stream;
 
 }
 
@@ -1019,16 +1058,27 @@ video.style.display=
 
 
 document
-.getElementById('captureButton')
-.style.display='none';
+.getElementById(
+'captureButton'
+)
+.style.display=
+'none';
+
 
 document
-.getElementById('useButton')
-.style.display='block';
+.getElementById(
+'useButton'
+)
+.style.display=
+'block';
+
 
 document
-.getElementById('retakeButton')
-.style.display='block';
+.getElementById(
+'retakeButton'
+)
+.style.display=
+'block';
 
 
 stopCamera();
@@ -1040,12 +1090,20 @@ stopCamera();
 function usePhoto(){
 
 document
-.getElementById('resultSelfie')
-.src=selfieData;
+.getElementById(
+'resultSelfie'
+)
+.src=
+selfieData;
+
 
 document
-.getElementById('analysisSelfie')
-.src=selfieData;
+.getElementById(
+'analysisSelfie'
+)
+.src=
+selfieData;
+
 
 go('q1');
 
@@ -1057,25 +1115,46 @@ async function retakePhoto(){
 
 selfieData=null;
 
-document
-.getElementById('photoPreview')
-.style.display='none';
 
 document
-.getElementById('video')
-.style.display='block';
+.getElementById(
+'photoPreview'
+)
+.style.display=
+'none';
+
 
 document
-.getElementById('captureButton')
-.style.display='block';
+.getElementById(
+'video'
+)
+.style.display=
+'block';
+
 
 document
-.getElementById('useButton')
-.style.display='none';
+.getElementById(
+'captureButton'
+)
+.style.display=
+'block';
+
 
 document
-.getElementById('retakeButton')
-.style.display='none';
+.getElementById(
+'useButton'
+)
+.style.display=
+'none';
+
+
+document
+.getElementById(
+'retakeButton'
+)
+.style.display=
+'none';
+
 
 await openCamera();
 
@@ -1089,7 +1168,9 @@ if(stream){
 
 stream
 .getTracks()
-.forEach(track=>track.stop());
+.forEach(
+track=>track.stop()
+);
 
 stream=null;
 
@@ -1126,75 +1207,95 @@ startAnalysis();
 function applyScore(c){
 
 if(c==='stage'){
+
 scores.electric+=3;
 scores.drums+=2;
 scores.voice+=3;
 scores.acoustic+=1;
+
 }
 
 if(c==='studio'){
+
 scores.piano+=2;
 scores.production+=4;
 scores.bass+=1;
 scores.acoustic+=1;
+
 }
 
 if(c==='loud'){
+
 scores.electric+=4;
 scores.drums+=4;
 scores.bass+=2;
+
 }
 
 if(c==='chill'){
+
 scores.piano+=3;
 scores.acoustic+=3;
 scores.ukulele+=3;
 scores.voice+=1;
 scores.production+=1;
+
 }
 
 if(c==='solo'){
+
 scores.piano+=3;
 scores.voice+=3;
 scores.acoustic+=2;
 scores.electric+=1;
+
 }
 
 if(c==='band'){
+
 scores.bass+=4;
 scores.drums+=3;
 scores.electric+=3;
 scores.ukulele+=1;
+
 }
 
 if(c==='rhythm'){
+
 scores.drums+=5;
 scores.bass+=4;
 scores.production+=2;
 scores.ukulele+=1;
+
 }
 
 if(c==='melody'){
+
 scores.piano+=4;
 scores.voice+=3;
 scores.acoustic+=3;
 scores.electric+=2;
 scores.ukulele+=2;
+
 }
 
 if(c==='perform'){
+
 scores.voice+=4;
 scores.electric+=3;
 scores.drums+=3;
 scores.acoustic+=2;
 scores.piano+=1;
+
 }
 
 if(c==='create'){
+
 scores.production+=6;
 scores.piano+=2;
 scores.acoustic+=1;
 scores.bass+=1;
+
 }
 
 }
@@ -1204,51 +1305,89 @@ scores.bass+=1;
 function calculateDNA(){
 
 let d={
+
 energy:55,
 stage:55,
 creative:60,
 team:55
+
 };
 
-if(answers.includes('loud'))
+
+if(
+answers.includes('loud')
+)
 d.energy+=30;
 
-if(answers.includes('chill'))
+
+if(
+answers.includes('chill')
+)
 d.energy+=8;
 
-if(answers.includes('stage'))
+
+if(
+answers.includes('stage')
+)
 d.stage+=30;
 
-if(answers.includes('perform'))
+
+if(
+answers.includes('perform')
+)
 d.stage+=15;
 
-if(answers.includes('studio'))
+
+if(
+answers.includes('studio')
+)
 d.creative+=15;
 
-if(answers.includes('create'))
+
+if(
+answers.includes('create')
+)
 d.creative+=25;
 
-if(answers.includes('melody'))
+
+if(
+answers.includes('melody')
+)
 d.creative+=12;
 
-if(answers.includes('band'))
+
+if(
+answers.includes('band')
+)
 d.team+=30;
 
-if(answers.includes('solo'))
+
+if(
+answers.includes('solo')
+)
 d.team+=5;
 
-if(answers.includes('rhythm'))
+
+if(
+answers.includes('rhythm')
+)
 d.team+=10;
 
 
 Object
 .keys(d)
-.forEach(k=>
-d[k]=Math.min(
+.forEach(k=>{
+
+d[k]=
+Math.min(
 98,
-Math.max(61,d[k])
+Math.max(
+61,
+d[k]
 )
 );
+
+});
 
 
 return d;
@@ -1273,6 +1412,7 @@ d.energy
 200
 );
 
+
 setTimeout(
 ()=>animateDNA(
 'stage',
@@ -1280,6 +1420,7 @@ d.stage
 ),
 500
 );
+
 
 setTimeout(
 ()=>animateDNA(
@@ -1289,6 +1430,7 @@ d.creative
 800
 );
 
+
 setTimeout(
 ()=>animateDNA(
 'team',
@@ -1296,6 +1438,7 @@ d.team
 ),
 1100
 );
+
 
 setTimeout(
 showResult,
@@ -1306,18 +1449,25 @@ showResult,
 
 
 
-function animateDNA(type,value){
+function animateDNA(
+type,
+value
+){
 
 document
-.getElementById(type+'Bar')
+.getElementById(
+type+'Bar'
+)
 .style.width=
 value+'%';
 
 
 let current=0;
 
+
 const text=
-document.getElementById(
+document
+.getElementById(
 type+'Loading'
 );
 
@@ -1331,10 +1481,14 @@ value,
 current+2
 );
 
+
 text.innerText=
 current+'%';
 
-if(current>=value)
+
+if(
+current>=value
+)
 clearInterval(timer);
 
 },20);
@@ -1348,75 +1502,186 @@ function getResultData(){
 return{
 
 electric:{
-name:"ELECTRIC GUITAR",
-icon:"🎸",
-archetype:"THE ROCKSTAR",
-text:"Bold, energetic and expressive. You were made to make an impact.",
-challenge:"Play your first riff!",
-challengeText:"Find the electric guitar at the Academia de Chitară booth and give it a try."
+
+name:
+"ELECTRIC GUITAR",
+
+icon:
+"🎸",
+
+archetype:
+"THE ROCKSTAR",
+
+text:
+"Bold, energetic and expressive. You were made to make an impact.",
+
+challenge:
+"Play your first riff!",
+
+challengeText:
+"Find the electric guitar at the Academia de Chitară booth and give it a try."
+
 },
+
 
 acoustic:{
-name:"ACOUSTIC GUITAR",
-icon:"🎸",
-archetype:"THE STORYTELLER",
-text:"Warm, expressive and versatile. Music is how you connect with people.",
-challenge:"Play your first chord!",
-challengeText:"Find an acoustic guitar at the Academia de Chitară booth and discover your first chord."
+
+name:
+"ACOUSTIC GUITAR",
+
+icon:
+"🎸",
+
+archetype:
+"THE STORYTELLER",
+
+text:
+"Warm, expressive and versatile. Music is how you connect with people.",
+
+challenge:
+"Play your first chord!",
+
+challengeText:
+"Find an acoustic guitar at the Academia de Chitară booth and discover your first chord."
+
 },
+
 
 piano:{
-name:"PIANO",
-icon:"🎹",
-archetype:"THE CREATOR",
-text:"Focused, expressive and imaginative. You like turning ideas into melodies.",
-challenge:"Play your first melody!",
-challengeText:"Find the piano at the Academia de Chitară booth and create your first few notes."
+
+name:
+"PIANO",
+
+icon:
+"🎹",
+
+archetype:
+"THE CREATOR",
+
+text:
+"Focused, expressive and imaginative. You like turning ideas into melodies.",
+
+challenge:
+"Play your first melody!",
+
+challengeText:
+"Find the piano at the Academia de Chitară booth and create your first few notes."
+
 },
+
 
 bass:{
-name:"BASS",
-icon:"🎸",
-archetype:"THE GROOVE MASTER",
-text:"Steady, rhythmic and essential. You feel the music from the inside.",
-challenge:"Find your first groove!",
-challengeText:"Try the bass at the Academia de Chitară booth and feel what holds a band together."
+
+name:
+"BASS",
+
+icon:
+"🎸",
+
+archetype:
+"THE GROOVE MASTER",
+
+text:
+"Steady, rhythmic and essential. You feel the music from the inside.",
+
+challenge:
+"Find your first groove!",
+
+challengeText:
+"Try the bass at the Academia de Chitară booth and feel what holds a band together."
+
 },
+
 
 drums:{
-name:"DRUMS",
-icon:"🥁",
-archetype:"THE POWERHOUSE",
-text:"Powerful, instinctive and energetic. Rhythm is your natural language.",
-challenge:"Play your first beat!",
-challengeText:"Sit behind the drums at the Academia de Chitară booth and show us your rhythm."
+
+name:
+"DRUMS",
+
+icon:
+"🥁",
+
+archetype:
+"THE POWERHOUSE",
+
+text:
+"Powerful, instinctive and energetic. Rhythm is your natural language.",
+
+challenge:
+"Play your first beat!",
+
+challengeText:
+"Sit behind the drums at the Academia de Chitară booth and show us your rhythm."
+
 },
+
 
 ukulele:{
-name:"UKULELE",
-icon:"🌴",
-archetype:"THE GOOD VIBE",
-text:"Positive, spontaneous and social. You bring good energy wherever you play.",
-challenge:"Play your first happy chord!",
-challengeText:"Find the ukulele and discover how quickly you can make music."
+
+name:
+"UKULELE",
+
+icon:
+"🌴",
+
+archetype:
+"THE GOOD VIBE",
+
+text:
+"Positive, spontaneous and social. You bring good energy wherever you play.",
+
+challenge:
+"Play your first happy chord!",
+
+challengeText:
+"Find the ukulele and discover how quickly you can make music."
+
 },
+
 
 voice:{
-name:"VOICE",
-icon:"🎤",
-archetype:"THE STAR VOICE",
-text:"Expressive, emotional and confident. Your personality comes through directly in the music.",
-challenge:"Sing your first chorus!",
-challengeText:"Meet the vocal teacher at the Academia de Chitară booth and give your voice a try."
+
+name:
+"VOICE",
+
+icon:
+"🎤",
+
+archetype:
+"THE STAR VOICE",
+
+text:
+"Expressive, emotional and confident. Your personality comes through directly in the music.",
+
+challenge:
+"Sing your first chorus!",
+
+challengeText:
+"Meet the vocal teacher at the Academia de Chitară booth and give your voice a try."
+
 },
 
+
 production:{
-name:"MUSIC PRODUCTION",
-icon:"🎛️",
-archetype:"THE PRODUCER",
-text:"Creative, curious and detail-oriented. You like building music from the ground up.",
-challenge:"Build your first beat!",
-challengeText:"Discover how songs are created at the Academia de Chitară booth."
+
+name:
+"MUSIC PRODUCTION",
+
+icon:
+"🎛️",
+
+archetype:
+"THE PRODUCER",
+
+text:
+"Creative, curious and detail-oriented. You like building music from the ground up.",
+
+challenge:
+"Build your first beat!",
+
+challengeText:
+"Discover how songs are created at the Academia de Chitară booth."
+
 }
 
 };
@@ -1440,6 +1705,7 @@ scores[a]>scores[b]
 const r=
 getResultData()[winner];
 
+
 const d=
 calculateDNA();
 
@@ -1449,28 +1715,51 @@ lastDNA=d;
 
 
 document
-.getElementById('resultIcon')
-.innerText=r.icon;
+.getElementById(
+'resultIcon'
+)
+.innerText=
+r.icon;
+
 
 document
-.getElementById('resultInstrument')
-.innerText=r.name;
+.getElementById(
+'resultInstrument'
+)
+.innerText=
+r.name;
+
 
 document
-.getElementById('resultArchetype')
-.innerText=r.archetype;
+.getElementById(
+'resultArchetype'
+)
+.innerText=
+r.archetype;
+
 
 document
-.getElementById('resultText')
-.innerText=r.text;
+.getElementById(
+'resultText'
+)
+.innerText=
+r.text;
+
 
 document
-.getElementById('challengeMain')
-.innerText=r.challenge;
+.getElementById(
+'challengeMain'
+)
+.innerText=
+r.challenge;
+
 
 document
-.getElementById('challengeText')
-.innerText=r.challengeText;
+.getElementById(
+'challengeText'
+)
+.innerText=
+r.challengeText;
 
 
 [
@@ -1479,14 +1768,16 @@ document
 'creative',
 'team'
 ]
-.forEach(k=>
+.forEach(k=>{
 
 document
-.getElementById(k+'Value')
+.getElementById(
+k+'Value'
+)
 .innerText=
-d[k]+'%'
+d[k]+'%';
 
-);
+});
 
 
 go('result');
@@ -1503,7 +1794,9 @@ setTimeout(()=>{
 .forEach(k=>{
 
 document
-.getElementById(k+'Result')
+.getElementById(
+k+'Result'
+)
 .style.width=
 d[k]+'%';
 
@@ -1537,37 +1830,186 @@ img.src=src;
 
 
 
-function roundRect(
+function makeRoundRect(
+ctx,
+x,
+y,
+w,
+h,
+r
+){
+
+ctx.beginPath();
+
+ctx.moveTo(
+x+r,
+y
+);
+
+ctx.lineTo(
+x+w-r,
+y
+);
+
+ctx.quadraticCurveTo(
+x+w,
+y,
+x+w,
+y+r
+);
+
+ctx.lineTo(
+x+w,
+y+h-r
+);
+
+ctx.quadraticCurveTo(
+x+w,
+y+h,
+x+w-r,
+y+h
+);
+
+ctx.lineTo(
+x+r,
+y+h
+);
+
+ctx.quadraticCurveTo(
+x,
+y+h,
+x,
+y+h-r
+);
+
+ctx.lineTo(
+x,
+y+r
+);
+
+ctx.quadraticCurveTo(
+x,
+y,
+x+r,
+y
+);
+
+ctx.closePath();
+
+}
+
+
+
+function fillRoundRect(
 ctx,
 x,
 y,
 w,
 h,
 r,
-fill,
-stroke
+color
 ){
 
-ctx.beginPath();
-
-ctx.roundRect(
-x,y,w,h,r
+makeRoundRect(
+ctx,x,y,w,h,r
 );
 
-if(fill){
+ctx.fillStyle=
+color;
 
-ctx.fillStyle=fill;
 ctx.fill();
 
 }
 
-if(stroke){
 
-ctx.strokeStyle=stroke;
-ctx.lineWidth=3;
+
+function strokeRoundRect(
+ctx,
+x,
+y,
+w,
+h,
+r,
+color,
+lineWidth
+){
+
+makeRoundRect(
+ctx,x,y,w,h,r
+);
+
+ctx.strokeStyle=
+color;
+
+ctx.lineWidth=
+lineWidth;
+
 ctx.stroke();
 
 }
+
+
+
+function wrapText(
+ctx,
+text,
+x,
+y,
+maxWidth,
+lineHeight
+){
+
+const words=
+text.split(" ");
+
+let line="";
+
+for(
+let n=0;
+n<words.length;
+n++
+){
+
+const test=
+line+
+words[n]+
+" ";
+
+
+if(
+ctx.measureText(test).width>
+maxWidth &&
+n>0
+){
+
+ctx.fillText(
+line,
+x,
+y
+);
+
+line=
+words[n]+" ";
+
+y+=
+lineHeight;
+
+}
+
+else{
+
+line=test;
+
+}
+
+}
+
+
+ctx.fillText(
+line,
+x,
+y
+);
 
 }
 
@@ -1582,10 +2024,11 @@ y,
 width
 ){
 
-ctx.fillStyle="#ffffff";
+ctx.fillStyle=
+"#ffffff";
 
 ctx.font=
-"700 26px Arial";
+"700 24px Arial";
 
 ctx.textAlign=
 "left";
@@ -1607,24 +2050,24 @@ y
 );
 
 
-roundRect(
+fillRoundRect(
 ctx,
 x,
-y+15,
+y+16,
 width,
-13,
-7,
+12,
+6,
 "#292929"
 );
 
 
-roundRect(
+fillRoundRect(
 ctx,
 x,
-y+15,
+y+16,
 width*(value/100),
-13,
-7,
+12,
+6,
 "#dcb631"
 );
 
@@ -1632,22 +2075,7 @@ width*(value/100),
 
 
 
-/* QR GENERATOR */
-
-async function loadQR(url){
-
-const qrURL=
-"https://api.qrserver.com/v1/create-qr-code/?size=300x300&data="
-+
-encodeURIComponent(url);
-
-return await loadImage(qrURL);
-
-}
-
-
-
-/* LANDSCAPE MUSIC CARD */
+/* CREATE LANDSCAPE CARD */
 
 async function makeMusicCard(){
 
@@ -1666,13 +2094,20 @@ return;
 }
 
 
+try{
+
+
 const canvas=
-document.getElementById(
+document
+.getElementById(
 'musicCardCanvas'
 );
 
+
 const ctx=
-canvas.getContext('2d');
+canvas.getContext(
+'2d'
+);
 
 
 const W=1600;
@@ -1683,60 +2118,56 @@ canvas.width=W;
 canvas.height=H;
 
 
-ctx.clearRect(
-0,0,W,H
-);
-
-
 /* BACKGROUND */
 
-const grad=
+const bg=
 ctx.createLinearGradient(
-0,0,W,H
-);
-
-grad.addColorStop(
 0,
-"#050505"
+0,
+W,
+H
 );
 
-grad.addColorStop(
+
+bg.addColorStop(
+0,
+"#030303"
+);
+
+
+bg.addColorStop(
 1,
 "#151515"
 );
 
-ctx.fillStyle=grad;
+
+ctx.fillStyle=
+bg;
+
 
 ctx.fillRect(
-0,0,W,H
+0,
+0,
+W,
+H
 );
 
 
-/* GOLD BORDER */
+/* BORDER */
 
-roundRect(
+strokeRoundRect(
 ctx,
 20,
 20,
-W-40,
-H-40,
-35,
-null,
-"#dcb631"
+1560,
+860,
+28,
+"#dcb631",
+4
 );
 
-ctx.strokeStyle=
-"#dcb631";
 
-ctx.lineWidth=5;
-
-
-/* LEFT SIDE */
-
-const leftX=85;
-
-
-/* LOGO */
+/* LOGO LEFT */
 
 try{
 
@@ -1745,215 +2176,187 @@ await loadImage(
 "logo.PNG"
 );
 
-const maxW=470;
 
-const ratio=
-logo.width/logo.height;
+const logoW=
+460;
 
-const logoW=maxW;
 
 const logoH=
-logoW/ratio;
+logoW*
+logo.height/
+logo.width;
+
 
 ctx.drawImage(
 logo,
-leftX,
-65,
+70,
+55,
 logoW,
 logoH
 );
 
-}catch(e){}
+}
+
+catch(e){
+
+console.log(
+"Logo error",
+e
+);
+
+}
 
 
-/* SMALL TITLE */
-
-ctx.fillStyle=
-"#dcb631";
-
-ctx.font=
-"700 25px Arial";
+/* LEFT TEXT */
 
 ctx.textAlign=
 "left";
 
-ctx.fillText(
-"YOUR MUSIC PERSONALITY",
-leftX,
-315
-);
-
-
-/* INSTRUMENT */
 
 ctx.fillStyle=
 "#dcb631";
 
+
 ctx.font=
-"900 58px Arial";
+"700 23px Arial";
+
 
 ctx.fillText(
-lastResult.name,
-leftX,
-390
+"YOUR MUSIC PERSONALITY",
+75,
+280
 );
 
 
-/* ARCHETYPE */
+ctx.fillStyle=
+"#dcb631";
+
+
+ctx.font=
+"900 58px Arial";
+
+
+ctx.fillText(
+lastResult.name,
+75,
+355
+);
+
 
 ctx.fillStyle=
 "#ffffff";
 
+
 ctx.font=
 "700 31px Arial";
 
+
 ctx.fillText(
 lastResult.archetype,
-leftX,
-440
+75,
+405
 );
 
-
-/* PERSONALITY TEXT */
 
 ctx.fillStyle=
-"#cfcfcf";
+"#cccccc";
+
 
 ctx.font=
-"26px Arial";
-
-
-function wrapText(
-context,
-text,
-x,
-y,
-maxWidth,
-lineHeight
-){
-
-const words=
-text.split(' ');
-
-let line='';
-
-for(
-let n=0;
-n<words.length;
-n++
-){
-
-const testLine=
-line+
-words[n]+
-' ';
-
-const metrics=
-context.measureText(
-testLine
-);
-
-const testWidth=
-metrics.width;
-
-if(
-testWidth>maxWidth &&
-n>0
-){
-
-context.fillText(
-line,
-x,
-y
-);
-
-line=
-words[n]+' ';
-
-y+=lineHeight;
-
-}else{
-
-line=testLine;
-
-}
-
-}
-
-context.fillText(
-line,
-x,
-y
-);
-
-return y;
-
-}
+"24px Arial";
 
 
 wrapText(
 ctx,
 lastResult.text,
-leftX,
-495,
-590,
-38
+75,
+450,
+600,
+35
 );
 
 
-/* DNA AREA */
+/* DNA PANEL */
+
+fillRoundRect(
+ctx,
+60,
+530,
+650,
+270,
+24,
+"#101010"
+);
+
+
+strokeRoundRect(
+ctx,
+60,
+530,
+650,
+270,
+24,
+"#333333",
+2
+);
+
 
 ctx.fillStyle=
 "#dcb631";
 
+
 ctx.font=
-"700 24px Arial";
+"700 23px Arial";
+
 
 ctx.fillText(
 "YOUR MUSIC DNA",
-leftX,
-610
+90,
+575
 );
 
 
 drawCardStat(
 ctx,
-"⚡ Energy",
+"Energy",
 lastDNA.energy,
-leftX,
-655,
-500
+90,
+620,
+550
 );
+
 
 drawCardStat(
 ctx,
-"🎤 Stage Power",
+"Stage Power",
 lastDNA.stage,
-leftX,
-710,
-500
+90,
+665,
+550
 );
+
 
 drawCardStat(
 ctx,
-"🎨 Creativity",
+"Creativity",
 lastDNA.creative,
-leftX,
-765,
-500
+90,
+710,
+550
 );
+
 
 drawCardStat(
 ctx,
-"🤝 Team Spirit",
+"Team Spirit",
 lastDNA.team,
-leftX,
-820,
-500
+90,
+755,
+550
 );
 
 
-/* SELFIE */
+/* SELFIE RIGHT */
 
 const selfie=
 await loadImage(
@@ -1961,34 +2364,45 @@ selfieData
 );
 
 
-const photoX=790;
-const photoY=80;
-const photoW=700;
-const photoH=550;
+const photoX=
+800;
 
 
-roundRect(
+const photoY=
+65;
+
+
+const photoW=
+710;
+
+
+const photoH=
+500;
+
+
+fillRoundRect(
 ctx,
-photoX-6,
-photoY-6,
-photoW+12,
-photoH+12,
-32,
+photoX-7,
+photoY-7,
+photoW+14,
+photoH+14,
+31,
 "#dcb631"
 );
 
 
 ctx.save();
 
-ctx.beginPath();
 
-ctx.roundRect(
+makeRoundRect(
+ctx,
 photoX,
 photoY,
 photoW,
 photoH,
-28
+25
 );
+
 
 ctx.clip();
 
@@ -1999,50 +2413,89 @@ photoW/selfie.width,
 photoH/selfie.height
 );
 
-const dw=
-selfie.width*scale;
 
-const dh=
-selfie.height*scale;
+const drawW=
+selfie.width*
+scale;
+
+
+const drawH=
+selfie.height*
+scale;
 
 
 ctx.drawImage(
 selfie,
-photoX+(photoW-dw)/2,
-photoY+(photoH-dh)/2,
-dw,
-dh
+
+photoX+
+(photoW-drawW)/2,
+
+photoY+
+(photoH-drawH)/2,
+
+drawW,
+drawH
 );
+
 
 ctx.restore();
 
 
-/* BOTTOM CTA */
+/* CTA PANEL */
 
-roundRect(
+fillRoundRect(
 ctx,
-760,
-670,
-750,
-160,
-28,
-"#0b0b0b",
-"#dcb631"
+780,
+610,
+740,
+210,
+24,
+"#080808"
+);
+
+
+strokeRoundRect(
+ctx,
+780,
+610,
+740,
+210,
+24,
+"#dcb631",
+3
+);
+
+
+ctx.textAlign=
+"left";
+
+
+ctx.fillStyle=
+"#ffffff";
+
+
+ctx.font=
+"900 32px Arial";
+
+
+ctx.fillText(
+"BOOK YOUR",
+820,
+670
 );
 
 
 ctx.fillStyle=
 "#dcb631";
 
-ctx.font=
-"900 34px Arial";
 
-ctx.textAlign=
-"left";
+ctx.font=
+"900 46px Arial";
+
 
 ctx.fillText(
-"BOOK YOUR LESSON NOW",
-800,
+"LESSON NOW",
+820,
 725
 );
 
@@ -2050,12 +2503,14 @@ ctx.fillText(
 ctx.fillStyle=
 "#ffffff";
 
+
 ctx.font=
-"24px Arial";
+"700 23px Arial";
+
 
 ctx.fillText(
 "at Academia de Chitară",
-800,
+820,
 765
 );
 
@@ -2063,58 +2518,45 @@ ctx.fillText(
 ctx.fillStyle=
 "#999999";
 
+
 ctx.font=
 "21px Arial";
 
+
 ctx.fillText(
 "AcademiaDeChitara.ro",
-800,
+820,
 800
 );
 
 
-/* QR */
-
-try{
+/* LOCAL QR */
 
 const qr=
-await loadQR(
-"https://www.academiadechitara.ro"
+await loadImage(
+QR_DATA
 );
+
 
 ctx.fillStyle=
 "#ffffff";
 
+
 ctx.fillRect(
-1320,
-685,
-170,
-170
+1285,
+630,
+190,
+190
 );
+
 
 ctx.drawImage(
 qr,
-1330,
-695,
-150,
-150
+1298,
+643,
+164,
+164
 );
-
-}catch(e){
-
-ctx.fillStyle=
-"#dcb631";
-
-ctx.font=
-"20px Arial";
-
-ctx.fillText(
-"SCAN TO BOOK",
-1325,
-780
-);
-
-}
 
 
 /* EXPORT */
@@ -2148,6 +2590,22 @@ go(
 "musicCard"
 );
 
+
+}
+
+catch(error){
+
+console.error(
+error
+);
+
+
+alert(
+"Card could not be created. Please try again."
+);
+
+}
+
 }
 
 
@@ -2169,22 +2627,31 @@ return;
 
 const file=
 new File(
+
 [cardBlob],
+
 "my-music-personality.png",
+
 {
 type:"image/png"
 }
+
 );
 
 
 try{
 
+
 if(
+
 navigator.canShare &&
+
 navigator.canShare({
 files:[file]
 }) &&
+
 navigator.share
+
 ){
 
 await navigator.share({
@@ -2201,21 +2668,6 @@ text:
 
 }
 
-else if(
-navigator.share
-){
-
-await navigator.share({
-
-title:
-"My Music Personality",
-
-text:
-"My Music Personality — Academia de Chitară"
-
-});
-
-}
 
 else{
 
@@ -2223,22 +2675,26 @@ openCardImage();
 
 }
 
+
 }
 
 catch(e){
 
 if(
 e.name!=="AbortError"
-)
+){
+
 openCardImage();
 
 }
 
 }
 
+}
 
 
-/* OPEN IMAGE */
+
+/* OPEN / SAVE */
 
 function openCardImage(){
 
@@ -2253,22 +2709,30 @@ return;
 }
 
 
-const w=
+const newWindow=
 window.open();
 
 
-if(w){
+if(newWindow){
 
-w.document.write(
+newWindow.document.write(
+
+'<html>'+
+'<head>'+
+'<meta name="viewport" content="width=device-width,initial-scale=1">'+
 '<title>My Music Personality</title>'+
-'<body style="margin:0;background:#000;text-align:center">'+
+'</head>'+
+'<body style="margin:0;background:#000;display:flex;justify-content:center;align-items:center;min-height:100vh">'+
 '<img src="'+
 cardDataUrl+
-'" style="width:100%;max-width:900px;height:auto">'+
-'</body>'
+'" style="width:100%;height:auto;max-width:1200px">'+
+'</body>'+
+'</html>'
+
 );
 
-w.document.close();
+
+newWindow.document.close();
 
 }
 
@@ -2289,6 +2753,7 @@ function restart(){
 
 stopCamera();
 
+
 selfieData=null;
 
 answers=[];
@@ -2303,6 +2768,7 @@ cardDataUrl=null;
 
 
 scores={
+
 electric:0,
 acoustic:0,
 piano:0,
@@ -2311,6 +2777,7 @@ drums:0,
 ukulele:0,
 voice:0,
 production:0
+
 };
 
 
@@ -2368,7 +2835,8 @@ document
 
 document
 .getElementById(id)
-.style.width='0%';
+.style.width=
+'0%';
 
 });
 
@@ -2383,7 +2851,8 @@ document
 
 document
 .getElementById(id)
-.innerText='0%';
+.innerText=
+'0%';
 
 });
 
