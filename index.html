@@ -8,175 +8,365 @@
 <style>
 *{box-sizing:border-box}
 
+:root{
+  --gold:#dcb631;
+  --bg:#050505;
+  --card:#111111;
+  --grey:#999;
+}
+
 body{
-margin:0;
-background:#080808;
-color:#fff;
-font-family:Arial,sans-serif
+  margin:0;
+  background:var(--bg);
+  color:white;
+  font-family:Arial,Helvetica,sans-serif;
 }
 
 .screen{
-display:none;
-min-height:100vh;
-padding:35px 24px;
-align-items:center;
-justify-content:center;
-text-align:center
+  display:none;
+  min-height:100vh;
+  padding:25px 24px 45px;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
 }
 
-.screen.active{display:flex}
+.screen.active{
+  display:flex;
+}
 
 .box{
-width:100%;
-max-width:520px
+  width:100%;
+  max-width:520px;
 }
 
-.brand{
-color:#d4af37;
-letter-spacing:3px;
-font-size:14px;
-font-weight:bold;
-margin-bottom:35px
+.logo{
+  width:230px;
+  max-width:75%;
+  display:block;
+  margin:0 auto 28px;
+  border-radius:12px;
+}
+
+.miniLogo{
+  width:175px;
+  max-width:60%;
+  display:block;
+  margin:0 auto 28px;
+  border-radius:10px;
 }
 
 h1{
-font-size:40px;
-line-height:1.05;
-margin:10px 0 18px
+  font-size:38px;
+  line-height:1.05;
+  margin:10px 0 18px;
 }
 
 h2{
-font-size:29px;
-margin-bottom:35px
+  font-size:28px;
+  line-height:1.2;
+  margin:10px 0 30px;
 }
 
-.gold{color:#d4af37}
+.gold{
+  color:var(--gold);
+}
 
 .subtitle{
-color:#ccc;
-font-size:18px;
-line-height:1.5;
-margin-bottom:38px
-}
-
-button{
-width:100%;
-min-height:65px;
-border-radius:14px;
-border:1px solid #d4af37;
-background:#151515;
-color:#fff;
-font-size:18px;
-font-weight:bold;
-margin:9px 0;
-padding:15px
-}
-
-.start{
-background:#d4af37;
-color:#000;
-font-size:20px
-}
-
-.secondary{
-background:#151515;
-color:#fff
+  color:#ccc;
+  font-size:17px;
+  line-height:1.45;
+  margin-bottom:34px;
 }
 
 .number{
-color:#d4af37;
-letter-spacing:2px;
-font-size:13px;
-margin-bottom:20px
+  color:var(--gold);
+  font-size:12px;
+  letter-spacing:2px;
+  font-weight:bold;
+  margin-bottom:18px;
 }
 
-.icon{
-font-size:85px;
-margin:20px 0
+button{
+  width:100%;
+  min-height:64px;
+  border-radius:15px;
+  border:1px solid var(--gold);
+  background:#141414;
+  color:white;
+  font-size:17px;
+  font-weight:bold;
+  padding:15px;
+  margin:8px 0;
 }
 
-.instrument{
-color:#d4af37;
-font-size:40px;
-font-weight:bold;
-margin:15px 0
+button:active{
+  transform:scale(.98);
 }
 
-.resultText{
-color:#ddd;
-font-size:18px;
-line-height:1.5;
-margin-bottom:35px
+.start{
+  background:var(--gold);
+  color:#000;
+  border:none;
+  font-size:19px;
 }
 
-.loader{
-width:55px;
-height:55px;
-border:5px solid #333;
-border-top:5px solid #d4af37;
-border-radius:50%;
-margin:35px auto;
-animation:spin 1s linear infinite
-}
-
-@keyframes spin{
-to{transform:rotate(360deg)}
+.secondary{
+  background:#111;
+  color:#fff;
 }
 
 .footer{
-margin-top:35px;
-color:#777;
-font-size:12px
+  margin-top:30px;
+  color:#666;
+  font-size:12px;
 }
 
+/* CAMERA */
+
 .cameraBox{
-width:100%;
-aspect-ratio:3/4;
-background:#111;
-border:1px solid #333;
-border-radius:22px;
-overflow:hidden;
-margin-bottom:20px;
-position:relative
+  width:100%;
+  max-width:360px;
+  aspect-ratio:3/4;
+  margin:0 auto 20px;
+  background:#111;
+  border:2px solid var(--gold);
+  border-radius:24px;
+  overflow:hidden;
 }
 
 video,
 #photoPreview{
-width:100%;
-height:100%;
-object-fit:cover;
-display:block
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
 }
 
 #photoPreview{
-display:none
+  display:none;
 }
 
 .cameraNote{
-color:#999;
-font-size:13px;
-line-height:1.4;
-margin:16px 0 24px
+  color:#888;
+  font-size:12px;
+  margin-top:15px;
 }
 
-.selfieResult{
-width:150px;
-height:150px;
-border-radius:50%;
-object-fit:cover;
-border:3px solid #d4af37;
-margin:10px auto 25px;
-display:block
+/* ANALYSIS */
+
+.analysisTitle{
+  font-size:30px;
+  margin-bottom:10px;
+}
+
+.analysisSub{
+  color:#999;
+  margin-bottom:35px;
+}
+
+.scanCircle{
+  width:150px;
+  height:150px;
+  margin:20px auto 35px;
+  border-radius:50%;
+  border:3px solid var(--gold);
+  position:relative;
+  overflow:hidden;
+}
+
+.scanCircle img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.scanLine{
+  position:absolute;
+  width:100%;
+  height:3px;
+  background:var(--gold);
+  box-shadow:0 0 14px var(--gold);
+  top:0;
+  animation:scan 1.4s infinite alternate ease-in-out;
+}
+
+@keyframes scan{
+  from{top:4%}
+  to{top:94%}
+}
+
+.dnaRow{
+  text-align:left;
+  margin:22px 0;
+}
+
+.dnaLabel{
+  display:flex;
+  justify-content:space-between;
+  font-size:14px;
+  margin-bottom:8px;
+}
+
+.dnaBar{
+  height:9px;
+  background:#262626;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.dnaFill{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#8f7014,var(--gold));
+  border-radius:10px;
+  transition:width 1.2s ease;
+}
+
+/* RESULT */
+
+.resultSelfie{
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  object-fit:cover;
+  border:3px solid var(--gold);
+  margin:5px auto 18px;
+}
+
+.resultIcon{
+  font-size:74px;
+  margin:8px 0;
+}
+
+.instrument{
+  color:var(--gold);
+  font-size:38px;
+  font-weight:900;
+  margin:8px 0 3px;
+}
+
+.archetype{
+  font-size:21px;
+  font-weight:bold;
+  letter-spacing:2px;
+  margin:8px 0 20px;
+}
+
+.resultText{
+  font-size:17px;
+  line-height:1.45;
+  color:#ddd;
+  margin-bottom:28px;
+}
+
+.resultPanel{
+  background:#101010;
+  border:1px solid #292929;
+  border-radius:20px;
+  padding:22px;
+  margin:18px 0;
+}
+
+.panelTitle{
+  color:var(--gold);
+  font-size:15px;
+  letter-spacing:2px;
+  font-weight:bold;
+  margin-bottom:18px;
+}
+
+.stat{
+  margin:16px 0;
+}
+
+.statTop{
+  display:flex;
+  justify-content:space-between;
+  font-size:14px;
+  margin-bottom:7px;
+}
+
+.statTrack{
+  background:#272727;
+  height:8px;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.statFill{
+  height:100%;
+  background:var(--gold);
+  border-radius:20px;
+  width:0;
+  transition:width 1.4s ease;
+}
+
+.challenge{
+  border:1px solid var(--gold);
+  border-radius:20px;
+  padding:22px;
+  margin:20px 0 24px;
+}
+
+.challengeTitle{
+  color:var(--gold);
+  letter-spacing:2px;
+  font-size:13px;
+  font-weight:bold;
+  margin-bottom:12px;
+}
+
+.challengeMain{
+  font-size:21px;
+  font-weight:bold;
+  margin-bottom:9px;
+}
+
+.challengeText{
+  font-size:14px;
+  line-height:1.45;
+  color:#bbb;
+}
+
+.reveal{
+  animation:reveal .7s ease;
+}
+
+@keyframes reveal{
+  from{
+    opacity:0;
+    transform:scale(.93);
+  }
+  to{
+    opacity:1;
+    transform:scale(1);
+  }
+}
+
+@media(max-width:420px){
+
+  h1{font-size:34px}
+
+  h2{font-size:25px}
+
+  .instrument{font-size:34px}
+
+  .logo{width:205px}
+
+  .miniLogo{width:155px}
 }
 </style>
 </head>
 
 <body>
 
+<!-- START -->
+
 <section class="screen active" id="start">
 <div class="box">
 
-<div class="brand">ACADEMIA DE CHITARĂ</div>
+<img src="logo.png" class="logo" alt="Academia de Chitara">
 
 <h1>
 WHAT'S YOUR<br>
@@ -184,21 +374,27 @@ WHAT'S YOUR<br>
 </h1>
 
 <div class="subtitle">
-Take a selfie, answer 5 quick questions and discover your instrument.
+Take a selfie, answer 5 quick questions and discover your musical identity.
 </div>
 
 <button class="start" onclick="openCamera()">
 START
 </button>
 
-<div class="footer">Music Personality Booth</div>
+<div class="footer">
+Music Personality Booth
+</div>
 
 </div>
 </section>
 
 
+<!-- CAMERA -->
+
 <section class="screen" id="camera">
 <div class="box">
+
+<img src="logo.png" class="miniLogo">
 
 <div class="number">STEP 1</div>
 
@@ -215,111 +411,338 @@ START
 📸 TAKE PHOTO
 </button>
 
-<button class="start" id="useButton" onclick="usePhoto()" style="display:none;">
+<button class="start" id="useButton"
+onclick="usePhoto()" style="display:none;">
 USE THIS PHOTO
 </button>
 
-<button class="secondary" id="retakeButton" onclick="retakePhoto()" style="display:none;">
+<button class="secondary" id="retakeButton"
+onclick="retakePhoto()" style="display:none;">
 RETAKE
 </button>
 
 <div class="cameraNote">
-Your photo stays on this device during this test and is not uploaded.
+Your photo stays on this device during this experience.
 </div>
 
 </div>
 </section>
 
+
+<!-- QUESTION 1 -->
 
 <section class="screen" id="q1">
 <div class="box">
+
+<img src="logo.png" class="miniLogo">
+
 <div class="number">QUESTION 1 OF 5</div>
+
 <h2>WHERE WOULD YOU<br>RATHER BE?</h2>
 
-<button onclick="choose('stage','q2')">🎤 ON STAGE</button>
-<button onclick="choose('studio','q2')">🎧 IN THE STUDIO</button>
+<button onclick="choose('stage','q2')">
+🎤 ON STAGE
+</button>
+
+<button onclick="choose('studio','q2')">
+🎧 IN THE STUDIO
+</button>
+
 </div>
 </section>
 
+
+<!-- QUESTION 2 -->
 
 <section class="screen" id="q2">
 <div class="box">
+
+<img src="logo.png" class="miniLogo">
+
 <div class="number">QUESTION 2 OF 5</div>
+
 <h2>HOW SHOULD YOUR<br>MUSIC FEEL?</h2>
 
-<button onclick="choose('loud','q3')">⚡ LOUD & ENERGETIC</button>
-<button onclick="choose('chill','q3')">🌙 CHILL & EMOTIONAL</button>
+<button onclick="choose('loud','q3')">
+⚡ LOUD & ENERGETIC
+</button>
+
+<button onclick="choose('chill','q3')">
+🌙 CHILL & EMOTIONAL
+</button>
+
 </div>
 </section>
 
+
+<!-- QUESTION 3 -->
 
 <section class="screen" id="q3">
 <div class="box">
+
+<img src="logo.png" class="miniLogo">
+
 <div class="number">QUESTION 3 OF 5</div>
+
 <h2>YOU'D RATHER...</h2>
 
-<button onclick="choose('solo','q4')">⭐ PLAY SOLO</button>
-<button onclick="choose('band','q4')">👥 PLAY IN A BAND</button>
+<button onclick="choose('solo','q4')">
+⭐ PLAY SOLO
+</button>
+
+<button onclick="choose('band','q4')">
+👥 PLAY IN A BAND
+</button>
+
 </div>
 </section>
 
+
+<!-- QUESTION 4 -->
 
 <section class="screen" id="q4">
 <div class="box">
+
+<img src="logo.png" class="miniLogo">
+
 <div class="number">QUESTION 4 OF 5</div>
+
 <h2>WHAT ATTRACTS YOU<br>MORE?</h2>
 
-<button onclick="choose('rhythm','q5')">🥁 RHYTHM</button>
-<button onclick="choose('melody','q5')">🎶 MELODY</button>
+<button onclick="choose('rhythm','q5')">
+🥁 RHYTHM
+</button>
+
+<button onclick="choose('melody','q5')">
+🎶 MELODY
+</button>
+
 </div>
 </section>
 
+
+<!-- QUESTION 5 -->
 
 <section class="screen" id="q5">
 <div class="box">
+
+<img src="logo.png" class="miniLogo">
+
 <div class="number">QUESTION 5 OF 5</div>
+
 <h2>YOU'D RATHER...</h2>
 
-<button onclick="finish('perform')">🎤 PERFORM</button>
-<button onclick="finish('create')">🎛️ CREATE MUSIC</button>
+<button onclick="finish('perform')">
+🎤 PERFORM
+</button>
+
+<button onclick="finish('create')">
+🎛️ CREATE MUSIC
+</button>
+
 </div>
 </section>
 
 
-<section class="screen" id="loading">
+<!-- ANALYSIS -->
+
+<section class="screen" id="analysis">
 <div class="box">
 
-<div class="brand">ACADEMIA DE CHITARĂ</div>
+<img src="logo.png" class="miniLogo">
 
-<h2>
+<div class="analysisTitle">
 ANALYZING YOUR<br>
-<span class="gold">MUSIC PERSONALITY...</span>
-</h2>
+<span class="gold">MUSIC DNA...</span>
+</div>
 
-<div class="loader"></div>
+<div class="analysisSub">
+Finding your musical identity
+</div>
+
+<div class="scanCircle">
+
+<img id="analysisSelfie">
+
+<div class="scanLine"></div>
+
+</div>
+
+<div class="dnaRow">
+<div class="dnaLabel">
+<span>⚡ ENERGY</span>
+<span id="energyLoading">0%</span>
+</div>
+
+<div class="dnaBar">
+<div class="dnaFill" id="energyBar"></div>
+</div>
+</div>
+
+
+<div class="dnaRow">
+<div class="dnaLabel">
+<span>🎤 STAGE POWER</span>
+<span id="stageLoading">0%</span>
+</div>
+
+<div class="dnaBar">
+<div class="dnaFill" id="stageBar"></div>
+</div>
+</div>
+
+
+<div class="dnaRow">
+<div class="dnaLabel">
+<span>🎨 CREATIVITY</span>
+<span id="creativeLoading">0%</span>
+</div>
+
+<div class="dnaBar">
+<div class="dnaFill" id="creativeBar"></div>
+</div>
+</div>
+
+
+<div class="dnaRow">
+<div class="dnaLabel">
+<span>🤝 TEAM SPIRIT</span>
+<span id="teamLoading">0%</span>
+</div>
+
+<div class="dnaBar">
+<div class="dnaFill" id="teamBar"></div>
+</div>
+</div>
 
 </div>
 </section>
 
+
+<!-- RESULT -->
 
 <section class="screen" id="result">
-<div class="box">
 
-<div class="brand">YOUR MUSIC PERSONALITY</div>
+<div class="box reveal">
 
-<img id="resultSelfie" class="selfieResult">
+<img src="logo.png" class="miniLogo">
 
-<div class="icon" id="resultIcon"></div>
+<div class="number">
+YOUR MUSIC PERSONALITY
+</div>
 
-<div class="instrument" id="resultInstrument"></div>
+<img id="resultSelfie"
+class="resultSelfie">
 
-<div class="resultText" id="resultText"></div>
+<div class="resultIcon"
+id="resultIcon"></div>
 
-<button class="start" onclick="restart()">TRY AGAIN</button>
+<div class="instrument"
+id="resultInstrument"></div>
 
-<div class="footer">AcademiaDeChitara.ro</div>
+<div class="archetype"
+id="resultArchetype"></div>
+
+<div class="resultText"
+id="resultText"></div>
+
+
+<div class="resultPanel">
+
+<div class="panelTitle">
+YOUR MUSIC DNA
+</div>
+
+
+<div class="stat">
+
+<div class="statTop">
+<span>⚡ Energy</span>
+<span id="energyValue"></span>
+</div>
+
+<div class="statTrack">
+<div class="statFill" id="energyResult"></div>
+</div>
 
 </div>
+
+
+<div class="stat">
+
+<div class="statTop">
+<span>🎤 Stage Power</span>
+<span id="stageValue"></span>
+</div>
+
+<div class="statTrack">
+<div class="statFill" id="stageResult"></div>
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div class="statTop">
+<span>🎨 Creativity</span>
+<span id="creativeValue"></span>
+</div>
+
+<div class="statTrack">
+<div class="statFill" id="creativeResult"></div>
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div class="statTop">
+<span>🤝 Team Spirit</span>
+<span id="teamValue"></span>
+</div>
+
+<div class="statTrack">
+<div class="statFill" id="teamResult"></div>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="challenge">
+
+<div class="challengeTitle">
+YOUR MUSIC CHALLENGE
+</div>
+
+<div class="challengeMain"
+id="challengeMain"></div>
+
+<div class="challengeText"
+id="challengeText"></div>
+
+</div>
+
+
+<button class="start"
+onclick="alert('Music Card is coming next!')">
+GET MY MUSIC CARD
+</button>
+
+<button class="secondary"
+onclick="restart()">
+TRY AGAIN
+</button>
+
+<div class="footer">
+AcademiaDeChitara.ro
+</div>
+
+</div>
+
 </section>
 
 
@@ -327,6 +750,8 @@ ANALYZING YOUR<br>
 
 let stream=null;
 let selfieData=null;
+
+let answers=[];
 
 let scores={
 electric:0,
@@ -339,10 +764,21 @@ voice:0,
 production:0
 };
 
+
 function go(id){
-document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-document.getElementById(id).classList.add('active');
+
+document
+.querySelectorAll('.screen')
+.forEach(s=>s.classList.remove('active'));
+
+document
+.getElementById(id)
+.classList.add('active');
+
+window.scrollTo(0,0);
+
 }
+
 
 async function openCamera(){
 
@@ -350,117 +786,167 @@ go('camera');
 
 try{
 
-stream=await navigator.mediaDevices.getUserMedia({
+stream=
+await navigator.mediaDevices.getUserMedia({
+
 video:{
 facingMode:"user",
 width:{ideal:1080},
 height:{ideal:1440}
 },
+
 audio:false
+
 });
 
 document.getElementById('video').srcObject=stream;
 
-}catch(error){
+}
+
+catch(error){
 
 alert(
-"Camera access is required. Please allow camera permission in your browser and try again."
+"Camera access is required. Please allow camera permission and try again."
 );
 
-console.error(error);
 }
 
 }
+
 
 function takePhoto(){
 
-const video=document.getElementById('video');
-const canvas=document.getElementById('canvas');
-const preview=document.getElementById('photoPreview');
+const video=
+document.getElementById('video');
+
+const canvas=
+document.getElementById('canvas');
+
+const preview=
+document.getElementById('photoPreview');
 
 canvas.width=video.videoWidth;
 canvas.height=video.videoHeight;
 
 const ctx=canvas.getContext('2d');
 
-ctx.drawImage(video,0,0,canvas.width,canvas.height);
+ctx.drawImage(
+video,
+0,
+0,
+canvas.width,
+canvas.height
+);
 
-selfieData=canvas.toDataURL('image/jpeg',0.9);
+selfieData=
+canvas.toDataURL(
+'image/jpeg',
+0.9
+);
 
 preview.src=selfieData;
+
 preview.style.display='block';
+
 video.style.display='none';
 
-document.getElementById('captureButton').style.display='none';
-document.getElementById('useButton').style.display='block';
-document.getElementById('retakeButton').style.display='block';
+document
+.getElementById('captureButton')
+.style.display='none';
+
+document
+.getElementById('useButton')
+.style.display='block';
+
+document
+.getElementById('retakeButton')
+.style.display='block';
 
 stopCamera();
+
 }
+
 
 function usePhoto(){
 
-document.getElementById('resultSelfie').src=selfieData;
+document
+.getElementById('resultSelfie')
+.src=selfieData;
+
+document
+.getElementById('analysisSelfie')
+.src=selfieData;
 
 go('q1');
 
 }
 
+
 async function retakePhoto(){
 
 selfieData=null;
 
-document.getElementById('photoPreview').style.display='none';
-document.getElementById('video').style.display='block';
+document
+.getElementById('photoPreview')
+.style.display='none';
 
-document.getElementById('captureButton').style.display='block';
-document.getElementById('useButton').style.display='none';
-document.getElementById('retakeButton').style.display='none';
+document
+.getElementById('video')
+.style.display='block';
 
-try{
+document
+.getElementById('captureButton')
+.style.display='block';
 
-stream=await navigator.mediaDevices.getUserMedia({
-video:{facingMode:"user"},
-audio:false
-});
+document
+.getElementById('useButton')
+.style.display='none';
 
-document.getElementById('video').srcObject=stream;
+document
+.getElementById('retakeButton')
+.style.display='none';
 
-}catch(error){
-
-alert("Camera could not be opened.");
+await openCamera();
 
 }
 
-}
 
 function stopCamera(){
 
 if(stream){
 
-stream.getTracks().forEach(track=>track.stop());
+stream
+.getTracks()
+.forEach(track=>track.stop());
+
 stream=null;
 
 }
 
 }
 
+
 function choose(choice,next){
 
+answers.push(choice);
+
 applyScore(choice);
+
 go(next);
 
 }
 
+
 function finish(choice){
+
+answers.push(choice);
 
 applyScore(choice);
 
-go('loading');
-
-setTimeout(showResult,1800);
+startAnalysis();
 
 }
+
 
 function applyScore(choice){
 
@@ -538,100 +1024,24 @@ scores.bass+=1;
 
 }
 
-function showResult(){
 
-let winner=Object.keys(scores).reduce((a,b)=>
-scores[a]>scores[b]?a:b
-);
+function calculateDNA(){
 
-let data={
-
-electric:{
-name:"ELECTRIC GUITAR",
-icon:"🎸",
-text:"Bold, energetic and expressive. You like making an impact and being heard."
-},
-
-acoustic:{
-name:"ACOUSTIC GUITAR",
-icon:"🎸",
-text:"Warm, expressive and versatile. You enjoy melody, connection and sharing music."
-},
-
-piano:{
-name:"PIANO",
-icon:"🎹",
-text:"Focused, creative and expressive. You enjoy building melodies and exploring harmony."
-},
-
-bass:{
-name:"BASS",
-icon:"🎸",
-text:"Steady, rhythmic and essential. You are the groove that keeps the band together."
-},
-
-drums:{
-name:"DRUMS",
-icon:"🥁",
-text:"Energetic, instinctive and rhythmic. You like driving the music forward."
-},
-
-ukulele:{
-name:"UKULELE",
-icon:"🌴",
-text:"Positive, relaxed and social. You like music that feels natural and fun."
-},
-
-voice:{
-name:"VOICE",
-icon:"🎤",
-text:"Expressive, emotional and confident. Your personality comes through directly in the music."
-},
-
-production:{
-name:"MUSIC PRODUCTION",
-icon:"🎛️",
-text:"Creative, curious and detail-oriented. You like shaping sounds and building music from the ground up."
-}
-
+let dna={
+energy:55,
+stage:55,
+creative:60,
+team:55
 };
 
-document.getElementById('resultIcon').innerText=data[winner].icon;
-document.getElementById('resultInstrument').innerText=data[winner].name;
-document.getElementById('resultText').innerText=data[winner].text;
+if(answers.includes('loud'))
+dna.energy+=30;
 
-go('result');
+if(answers.includes('chill'))
+dna.energy+=8;
 
-}
+if(answers.includes('stage'))
+dna.stage+=30;
 
-function restart(){
-
-stopCamera();
-
-selfieData=null;
-
-scores={
-electric:0,
-acoustic:0,
-piano:0,
-bass:0,
-drums:0,
-ukulele:0,
-voice:0,
-production:0
-};
-
-document.getElementById('photoPreview').style.display='none';
-document.getElementById('video').style.display='block';
-
-document.getElementById('captureButton').style.display='block';
-document.getElementById('useButton').style.display='none';
-document.getElementById('retakeButton').style.display='none';
-
-go('start');
-
-}
-
-</script>
-</body>
-</html>
+if(answers.includes('perform'))
+dna.stage+=15
