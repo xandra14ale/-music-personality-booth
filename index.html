@@ -2079,539 +2079,441 @@ width*(value/100),
 
 async function makeMusicCard(){
 
-if(
-!selfieData ||
-!lastResult ||
-!lastDNA
-){
+  if(!selfieData || !lastResult || !lastDNA){
+    alert("Please complete the quiz first.");
+    return;
+  }
 
-alert(
-"Please complete the quiz first."
-);
+  try{
 
-return;
+    const canvas=document.getElementById('musicCardCanvas');
+    const ctx=canvas.getContext('2d');
+
+    const W=1600;
+    const H=900;
+
+    canvas.width=W;
+    canvas.height=H;
+
+    /* BACKGROUND */
+
+    const bg=ctx.createLinearGradient(0,0,W,H);
+    bg.addColorStop(0,"#030303");
+    bg.addColorStop(1,"#151515");
+
+    ctx.fillStyle=bg;
+    ctx.fillRect(0,0,W,H);
+
+    /* GOLD BORDER */
+
+    strokeRoundRect(
+      ctx,
+      20,
+      20,
+      1560,
+      860,
+      30,
+      "#dcb631",
+      5
+    );
+
+
+    /* =========================
+       LOGO - HIGHER AND SMALLER
+       ========================= */
+
+    try{
+
+      const logo=await loadImage("logo.PNG");
+
+      /*
+      Crop logo so the empty black area
+      from the original image is reduced.
+      */
+
+      const sx=0;
+      const sy=Math.floor(logo.height*0.22);
+      const sw=logo.width;
+      const sh=Math.floor(logo.height*0.48);
+
+      ctx.drawImage(
+        logo,
+
+        sx,
+        sy,
+        sw,
+        sh,
+
+        70,
+        38,
+        455,
+        160
+      );
+
+    }catch(e){
+
+      ctx.fillStyle="#dcb631";
+      ctx.font="700 30px Arial";
+      ctx.textAlign="left";
+
+      ctx.fillText(
+        "AcademiaDeChitara.ro",
+        75,
+        105
+      );
+
+    }
+
+
+    /* =========================
+       LEFT TEXT
+       ========================= */
+
+    ctx.textAlign="left";
+
+    ctx.fillStyle="#dcb631";
+
+    ctx.font="700 22px Arial";
+
+    ctx.fillText(
+      "YOUR MUSIC PERSONALITY",
+      75,
+      235
+    );
+
+
+    /* INSTRUMENT */
+
+    ctx.fillStyle="#dcb631";
+
+    ctx.font="900 55px Arial";
+
+    ctx.fillText(
+      lastResult.name,
+      75,
+      305
+    );
+
+
+    /* ARCHETYPE */
+
+    ctx.fillStyle="#ffffff";
+
+    ctx.font="700 30px Arial";
+
+    ctx.fillText(
+      lastResult.archetype,
+      75,
+      355
+    );
+
+
+    /* DESCRIPTION */
+
+    ctx.fillStyle="#cccccc";
+
+    ctx.font="23px Arial";
+
+    wrapText(
+      ctx,
+      lastResult.text,
+      75,
+      405,
+      600,
+      34,
+      3
+    );
+
+
+    /* =========================
+       MUSIC DNA
+       ========================= */
+
+    fillRoundRect(
+      ctx,
+      60,
+      500,
+      650,
+      305,
+      24,
+      "#101010"
+    );
+
+    strokeRoundRect(
+      ctx,
+      60,
+      500,
+      650,
+      305,
+      24,
+      "#333333",
+      2
+    );
+
+
+    ctx.fillStyle="#dcb631";
+
+    ctx.font="700 23px Arial";
+
+    ctx.textAlign="left";
+
+    ctx.fillText(
+      "YOUR MUSIC DNA",
+      90,
+      545
+    );
+
+
+    drawCardStat(
+      ctx,
+      "Energy",
+      lastDNA.energy,
+      90,
+      595,
+      550
+    );
+
+
+    drawCardStat(
+      ctx,
+      "Stage Power",
+      lastDNA.stage,
+      90,
+      650,
+      550
+    );
+
+
+    drawCardStat(
+      ctx,
+      "Creativity",
+      lastDNA.creative,
+      90,
+      705,
+      550
+    );
+
+
+    drawCardStat(
+      ctx,
+      "Team Spirit",
+      lastDNA.team,
+      90,
+      760,
+      550
+    );
+
+
+    /* =========================
+       SELFIE - RIGHT SIDE
+       ========================= */
+
+    try{
+
+      const selfie=await loadImage(selfieData);
+
+      const photoX=800;
+      const photoY=65;
+
+      const photoW=710;
+      const photoH=500;
+
+
+      fillRoundRect(
+        ctx,
+        photoX-7,
+        photoY-7,
+        photoW+14,
+        photoH+14,
+        31,
+        "#dcb631"
+      );
+
+
+      ctx.save();
+
+      pathRoundRect(
+        ctx,
+        photoX,
+        photoY,
+        photoW,
+        photoH,
+        25
+      );
+
+      ctx.clip();
+
+
+      const scale=Math.max(
+        photoW/selfie.width,
+        photoH/selfie.height
+      );
+
+
+      const drawW=selfie.width*scale;
+      const drawH=selfie.height*scale;
+
+
+      ctx.drawImage(
+        selfie,
+
+        photoX+(photoW-drawW)/2,
+
+        photoY+(photoH-drawH)/2,
+
+        drawW,
+        drawH
+      );
+
+
+      ctx.restore();
+
+    }catch(e){
+
+      fillRoundRect(
+        ctx,
+        800,
+        65,
+        710,
+        500,
+        25,
+        "#111111"
+      );
+
+    }
+
+
+    /* =========================
+       BOOK LESSON PANEL
+       NO QR
+       ========================= */
+
+    fillRoundRect(
+      ctx,
+      780,
+      610,
+      740,
+      210,
+      24,
+      "#080808"
+    );
+
+
+    strokeRoundRect(
+      ctx,
+      780,
+      610,
+      740,
+      210,
+      24,
+      "#dcb631",
+      3
+    );
+
+
+    ctx.textAlign="center";
+
+
+    ctx.fillStyle="#ffffff";
+
+    ctx.font="900 31px Arial";
+
+    ctx.fillText(
+      "BOOK YOUR",
+      1150,
+      665
+    );
+
+
+    ctx.fillStyle="#dcb631";
+
+    ctx.font="900 47px Arial";
+
+    ctx.fillText(
+      "LESSON NOW",
+      1150,
+      720
+    );
+
+
+    ctx.fillStyle="#ffffff";
+
+    ctx.font="700 22px Arial";
+
+    ctx.fillText(
+      "AT ACADEMIA DE CHITARĂ",
+      1150,
+      760
+    );
+
+
+    /*
+    Website replaces QR completely.
+    */
+
+    ctx.fillStyle="#dcb631";
+
+    ctx.font="700 25px Arial";
+
+    ctx.fillText(
+      "www.academiadechitara.ro",
+      1150,
+      800
+    );
+
+
+    /* =========================
+       EXPORT CARD
+       ========================= */
+
+    cardDataUrl=
+      canvas.toDataURL(
+        "image/png"
+      );
+
+
+    document
+      .getElementById("cardPreview")
+      .src=
+      cardDataUrl;
+
+
+    cardBlob=
+      await new Promise(resolve=>
+
+        canvas.toBlob(
+          resolve,
+          "image/png",
+          1
+        )
+
+      );
+
+
+    if(!cardBlob){
+
+      cardBlob=
+        dataURLToBlob(
+          cardDataUrl
+        );
+
+    }
+
+
+    go("musicCard");
+
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      "Card could not be created. Please try again."
+    );
+
+  }
 
 }
-
-
-try{
-
-
-const canvas=
-document
-.getElementById(
-'musicCardCanvas'
-);
-
-
-const ctx=
-canvas.getContext(
-'2d'
-);
-
-
-const W=1600;
-const H=900;
-
-
-canvas.width=W;
-canvas.height=H;
-
-
-/* BACKGROUND */
-
-const bg=
-ctx.createLinearGradient(
-0,
-0,
-W,
-H
-);
-
-
-bg.addColorStop(
-0,
-"#030303"
-);
-
-
-bg.addColorStop(
-1,
-"#151515"
-);
-
-
-ctx.fillStyle=
-bg;
-
-
-ctx.fillRect(
-0,
-0,
-W,
-H
-);
-
-
-/* BORDER */
-
-strokeRoundRect(
-ctx,
-20,
-20,
-1560,
-860,
-28,
-"#dcb631",
-4
-);
-
-
-/* LOGO LEFT */
-
-try{
-
-const logo=
-await loadImage(
-"logo.PNG"
-);
-
-
-const logoW=
-460;
-
-
-const logoH=
-logoW*
-logo.height/
-logo.width;
-
-
-ctx.drawImage(
-logo,
-70,
-55,
-logoW,
-logoH
-);
-
-}
-
-catch(e){
-
-console.log(
-"Logo error",
-e
-);
-
-}
-
-
-/* LEFT TEXT */
-
-ctx.textAlign=
-"left";
-
-
-ctx.fillStyle=
-"#dcb631";
-
-
-ctx.font=
-"700 23px Arial";
-
-
-ctx.fillText(
-"YOUR MUSIC PERSONALITY",
-75,
-280
-);
-
-
-ctx.fillStyle=
-"#dcb631";
-
-
-ctx.font=
-"900 58px Arial";
-
-
-ctx.fillText(
-lastResult.name,
-75,
-355
-);
-
-
-ctx.fillStyle=
-"#ffffff";
-
-
-ctx.font=
-"700 31px Arial";
-
-
-ctx.fillText(
-lastResult.archetype,
-75,
-405
-);
-
-
-ctx.fillStyle=
-"#cccccc";
-
-
-ctx.font=
-"24px Arial";
-
-
-wrapText(
-ctx,
-lastResult.text,
-75,
-450,
-600,
-35
-);
-
-
-/* DNA PANEL */
-
-fillRoundRect(
-ctx,
-60,
-530,
-650,
-270,
-24,
-"#101010"
-);
-
-
-strokeRoundRect(
-ctx,
-60,
-530,
-650,
-270,
-24,
-"#333333",
-2
-);
-
-
-ctx.fillStyle=
-"#dcb631";
-
-
-ctx.font=
-"700 23px Arial";
-
-
-ctx.fillText(
-"YOUR MUSIC DNA",
-90,
-575
-);
-
-
-drawCardStat(
-ctx,
-"Energy",
-lastDNA.energy,
-90,
-620,
-550
-);
-
-
-drawCardStat(
-ctx,
-"Stage Power",
-lastDNA.stage,
-90,
-665,
-550
-);
-
-
-drawCardStat(
-ctx,
-"Creativity",
-lastDNA.creative,
-90,
-710,
-550
-);
-
-
-drawCardStat(
-ctx,
-"Team Spirit",
-lastDNA.team,
-90,
-755,
-550
-);
-
-
-/* SELFIE RIGHT */
-
-const selfie=
-await loadImage(
-selfieData
-);
-
-
-const photoX=
-800;
-
-
-const photoY=
-65;
-
-
-const photoW=
-710;
-
-
-const photoH=
-500;
-
-
-fillRoundRect(
-ctx,
-photoX-7,
-photoY-7,
-photoW+14,
-photoH+14,
-31,
-"#dcb631"
-);
-
-
-ctx.save();
-
-
-makeRoundRect(
-ctx,
-photoX,
-photoY,
-photoW,
-photoH,
-25
-);
-
-
-ctx.clip();
-
-
-const scale=
-Math.max(
-photoW/selfie.width,
-photoH/selfie.height
-);
-
-
-const drawW=
-selfie.width*
-scale;
-
-
-const drawH=
-selfie.height*
-scale;
-
-
-ctx.drawImage(
-selfie,
-
-photoX+
-(photoW-drawW)/2,
-
-photoY+
-(photoH-drawH)/2,
-
-drawW,
-drawH
-);
-
-
-ctx.restore();
-
-
-/* CTA PANEL */
-
-fillRoundRect(
-ctx,
-780,
-610,
-740,
-210,
-24,
-"#080808"
-);
-
-
-strokeRoundRect(
-ctx,
-780,
-610,
-740,
-210,
-24,
-"#dcb631",
-3
-);
-
-
-ctx.textAlign=
-"left";
-
-
-ctx.fillStyle=
-"#ffffff";
-
-
-ctx.font=
-"900 32px Arial";
-
-
-ctx.fillText(
-"BOOK YOUR",
-820,
-670
-);
-
-
-ctx.fillStyle=
-"#dcb631";
-
-
-ctx.font=
-"900 46px Arial";
-
-
-ctx.fillText(
-"LESSON NOW",
-820,
-725
-);
-
-
-ctx.fillStyle=
-"#ffffff";
-
-
-ctx.font=
-"700 23px Arial";
-
-
-ctx.fillText(
-"at Academia de Chitară",
-820,
-765
-);
-
-
-ctx.fillStyle=
-"#999999";
-
-
-ctx.font=
-"21px Arial";
-
-
-ctx.fillText(
-"AcademiaDeChitara.ro",
-820,
-800
-);
-
-
-/* QR AREA - SAFE VERSION */
-
-ctx.fillStyle="#ffffff";
-
-ctx.fillRect(
-1285,
-630,
-190,
-190
-);
-
-ctx.fillStyle="#000000";
-ctx.font="700 26px Arial";
-ctx.textAlign="center";
-
-ctx.fillText(
-"QR",
-1380,
-710
-);
-
-ctx.font="16px Arial";
-
-ctx.fillText(
-"AcademiaDeChitara.ro",
-1380,
-750
-);
-
-
-/* EXPORT */
-
-cardDataUrl=
-canvas.toDataURL(
-"image/png"
-);
-
-
-document
-.getElementById(
-"cardPreview"
-)
-.src=
-cardDataUrl;
-
-
-cardBlob=
-await new Promise(
-resolve=>
-canvas.toBlob(
-resolve,
-"image/png",
-1
-)
-);
-
-
-go(
-"musicCard"
-);
-
-
-}
-
-catch(error){
-
-console.error(
-error
-);
-
-
-alert(
-"Card could not be created. Please try again."
-);
-
-}
-
-}
-
-
-
-/* SHARE */
 
 async function shareCard(){
 
