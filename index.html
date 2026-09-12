@@ -2530,17 +2530,9 @@ ctx.fillText(
 );
 
 
-/* LOCAL QR */
+/* QR AREA - SAFE VERSION */
 
-const qr=
-await loadImage(
-QR_DATA
-);
-
-
-ctx.fillStyle=
-"#ffffff";
-
+ctx.fillStyle="#ffffff";
 
 ctx.fillRect(
 1285,
@@ -2549,13 +2541,22 @@ ctx.fillRect(
 190
 );
 
+ctx.fillStyle="#000000";
+ctx.font="700 26px Arial";
+ctx.textAlign="center";
 
-ctx.drawImage(
-qr,
-1298,
-643,
-164,
-164
+ctx.fillText(
+"QR",
+1380,
+710
+);
+
+ctx.font="16px Arial";
+
+ctx.fillText(
+"AcademiaDeChitara.ro",
+1380,
+750
 );
 
 
